@@ -67,14 +67,23 @@ function displayVerses(verses, surahId) {
         arabicText.style.fontSize = `${textSizeSlider.value}px`;
         arabicText.dir = 'rtl';
 
-        if (fontSelect.value === 'Uthmani') {
-            arabicText.style.fontFamily = 'Amiri';
-            arabicText.innerText = verse.text_uthmani;
-        } else if (fontSelect.value === 'IndoPak') {
-            arabicText.style.fontFamily = 'Noto Naskh Arabic';
-            arabicText.innerText = verse.text_indopak || verse.text_uthmani;
+        if (fontSelect.value === 'IndoPak') {
+            fetch(`${API_BASE_URL}/quran/verses/indopak?chapter_number=${surahId}&verse_number=${verse.verse_number}`)
+                .then(response => response.json())
+                .then(data => {
+                    arabicText.style.fontFamily = 'Noto Naskh Arabic';
+                    arabicText.style.letterSpacing = '2px';
+                    arabicText.style.wordSpacing = '8px';
+                    arabicText.innerText = data.verses[0].text_indopak;
+                })
+                .catch(error => {
+                    console.error('Error fetching Indo-Pak text:', error);
+                    arabicText.innerText = verse.text_uthmani;
+                });
         } else {
             arabicText.style.fontFamily = 'Amiri';
+            arabicText.style.letterSpacing = 'normal';
+            arabicText.style.wordSpacing = 'normal';
             arabicText.innerText = verse.text_uthmani;
         }
 
