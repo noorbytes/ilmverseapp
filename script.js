@@ -38,7 +38,7 @@ async function populateSurahDropdown() {
 // Load Surah by ID
 async function loadSurah(surahId) {
     try {
-        const url = `${API_BASE_URL}/verses/by_chapter/${surahId}?translations=131&fields=text_uthmani,text_indopak,page=1&per_page=300`;
+        const url = `${API_BASE_URL}/verses/by_chapter/${surahId}?translations=131&fields=text_uthmani,text_indopak&transliterations=32&page=1&per_page=300`;
         const response = await fetch(url);
         const data = await response.json();
 
@@ -99,13 +99,20 @@ function displayVerses(verses, surahId) {
             arabicText.innerText = verse.text_uthmani;
         }
 
+        const transliterationText = document.createElement('p');
+        transliterationText.className = 'text-sm text-gray-300 mt-2';
+        transliterationText.style.fontSize = '1.1rem';
+        transliterationText.innerText = verse.transliterations?.[0]?.text || '';
+        transliterationText.style.display = document.getElementById('show-transliteration').checked ? 'block' : 'none';
+
         const translationText = document.createElement('p');
-        translationText.className = 'text-sm text-gray-400';
+        translationText.className = 'text-sm text-gray-400 mt-2';
         translationText.style.fontSize = '1.25rem';
         translationText.innerText = verse.translations[0].text.replace(/<sup[^>]*>.*?<\/sup>/g, '').trim();
 
         verseBlock.appendChild(verseNumberText);
         verseBlock.appendChild(arabicText);
+        verseBlock.appendChild(transliterationText);
         verseBlock.appendChild(translationText);
         verseContainer.appendChild(verseBlock);
     });
@@ -257,6 +264,14 @@ audioPlayer.addEventListener('timeupdate', () => {
 
 audioPlayer.addEventListener('loadedmetadata', () => {
     durationTimeDisplay.innerText = formatTime(audioPlayer.duration);
+});
+
+// Transliteration toggle handler
+document.getElementById('show-transliteration').addEventListener('change', (e) => {
+    const transliterations = document.querySelectorAll('.text-gray-300');
+    transliterations.forEach(el => {
+        el.style.display = e.target.checked ? 'block' : 'none';
+    });
 });
 
 // Initialize the App
