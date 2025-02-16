@@ -71,13 +71,22 @@ function displayVerses(verses, surahId) {
         arabicText.dir = 'rtl';
 
         if (fontSelect.value === 'IndoPak') {
+            arabicText.style.fontFamily = 'Noto Naskh Arabic';
+            arabicText.style.letterSpacing = '2px';
+            arabicText.style.wordSpacing = '8px';
+            // Get IndoPak text from the current verse
             fetch(`${API_BASE_URL}/quran/verses/indopak?chapter_number=${surahId}&verse_number=${verse.verse_number}`)
                 .then(response => response.json())
                 .then(data => {
-                    arabicText.style.fontFamily = 'Noto Naskh Arabic';
-                    arabicText.style.letterSpacing = '2px';
-                    arabicText.style.wordSpacing = '8px';
-                    arabicText.innerText = data.verses[0].text_indopak;
+                    if (data.verses && data.verses.length > 0) {
+                        // Find the matching verse
+                        const matchingVerse = data.verses.find(v => v.verse_number === verse.verse_number);
+                        if (matchingVerse) {
+                            arabicText.innerText = matchingVerse.text_indopak;
+                        } else {
+                            arabicText.innerText = verse.text_uthmani;
+                        }
+                    }
                 })
                 .catch(error => {
                     console.error('Error fetching Indo-Pak text:', error);
