@@ -53,7 +53,10 @@ async function loadSurah(surahId) {
 // Display Verses with Arabic and Translation
 function displayVerses(verses, surahId) {
     verseContainer.innerHTML = '';
-    verses.forEach(verse => {
+    verses.forEach((verse, index) => {
+        // Skip Bismillah for verses after first one
+        if (verse.verse_key.endsWith('1') && index > 0) return;
+        
         const verseBlock = document.createElement('div');
         verseBlock.className = 'p-4 border-b border-gray-700';
         verseBlock.id = `verse-${verse.verse_number}`;
