@@ -269,7 +269,7 @@ audioPlayer.addEventListener('loadedmetadata', () => {
 
 // Transliteration toggle handler
 document.getElementById('show-transliteration').addEventListener('change', (e) => {
-    const transliterations = document.querySelectorAll('.text-gray-300');
+    const transliterations = document.querySelectorAll('.text-sm.text-gray-300');
     transliterations.forEach(el => {
         el.style.display = e.target.checked ? 'block' : 'none';
     });
