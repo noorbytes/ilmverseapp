@@ -63,8 +63,9 @@ function displayVerses(verses, surahId) {
         verseNumberText.innerText = `${surahId}:${verse.verse_number}`;
 
         const arabicText = document.createElement('p');
-        arabicText.className = 'text-arabic text-right mb-2';
+        arabicText.className = 'arabic-text mb-2';
         arabicText.style.fontSize = `${textSizeSlider.value}px`;
+        arabicText.dir = 'rtl';
 
         if (fontSelect.value === 'Uthmani') {
             arabicText.style.fontFamily = 'Amiri';
