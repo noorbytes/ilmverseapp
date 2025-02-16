@@ -39,6 +39,7 @@ async function populateSurahDropdown() {
 async function loadSurah(surahId) {
     try {
         const url = `${API_BASE_URL}/verses/by_chapter/${surahId}?translations=131&fields=text_uthmani,text_indopak&transliterations=37&page=1&per_page=300`;
+    console.log('Fetching from URL:', url); // Debug log
         const response = await fetch(url);
         const data = await response.json();
 
@@ -52,10 +53,13 @@ async function loadSurah(surahId) {
 
 // Display Verses with Arabic and Translation
 function displayVerses(verses, surahId) {
+    console.log('Received verses:', verses); // Debug log
     verseContainer.innerHTML = '';
     verses.forEach((verse, index) => {
         // Skip Bismillah for verses after first one
         if (verse.verse_key.endsWith('1') && index > 0) return;
+        
+        console.log('Processing verse:', verse); // Debug log
         
         const verseBlock = document.createElement('div');
         verseBlock.className = 'p-4 border-b border-gray-700';
@@ -102,9 +106,15 @@ function displayVerses(verses, surahId) {
         const transliterationText = document.createElement('p');
         transliterationText.className = 'text-sm text-gray-300 mt-2';
         transliterationText.style.fontSize = '1.1rem';
-        const transliteration = verse.transliterations && verse.transliterations.length > 0 ? verse.transliterations[0].text : '';
+        console.log('Transliterations:', verse.transliterations); // Debug log
+        let transliteration = '';
+        if (verse.transliterations && Array.isArray(verse.transliterations) && verse.transliterations.length > 0) {
+            transliteration = verse.transliterations[0].text || '';
+        }
         transliterationText.innerText = transliteration;
-        transliterationText.style.display = document.getElementById('show-transliteration').checked ? 'block' : 'none';
+        const shouldShow = document.getElementById('show-transliteration').checked;
+        transliterationText.style.display = shouldShow ? 'block' : 'none';
+        console.log('Transliteration visibility:', shouldShow); // Debug log
 
         const translationText = document.createElement('p');
         translationText.className = 'text-sm text-gray-400 mt-2';
