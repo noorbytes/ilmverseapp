@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quran Recitation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="script.js" defer></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Amiri', serif;
+        }
+        #verse-container::-webkit-scrollbar {
+            display: none;
+        }
+        #verse-container {
+            height: 70vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .active {
+            background-color: rgba(59, 130, 246, 0.3);
+        }
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 p-4">
+        <div class="flex justify-between">
+            <div class="text-xl font-bold">Quran Recitation</div>
+            <div class="space-x-4">
+                <a href="#" class="text-gray-300 hover:text-white">Home</a>
+                <a href="#" class="text-gray-300 hover:text-white">About</a>
+                <a href="#" class="text-gray-300 hover:text-white">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="p-4 sm:p-8 space-y-4">
+        <!-- Surah Dropdown (Excluded from settings) -->
+        <label for="surah-select" class="block text-sm font-medium">Surahs</label>
+        <select id="surah-select" class="text-black p-2 mb-4"></select>
+
+        <!-- Collapsible Settings Button -->
+        <button onclick="toggleSettings()" class="bg-blue-500 px-4 py-2 rounded mb-4">Settings</button>
+        
+        <!-- Settings Panel (Collapsible) -->
+        <div id="settings-panel" class="space-y-4 hidden">
+            <div class="controls flex flex-wrap space-x-4">
+                
+                <!-- Reciter Dropdown -->
+                <label for="qari-select" class="block text-sm font-medium">Reciter</label>
+                <select id="qari-select" class="text-black p-2">
+                    <option value="Alafasy">Alafasy</option>
+                </select>
+
+                <!-- Arabic Font Dropdown (Including Uthmani and Indo-Pak) -->
+                <label for="font-select" class="block text-sm font-medium">Arabic Font</label>
+                <select id="font-select" class="text-black p-2">
+                    <option value="Amiri">Amiri</option>
+                    <option value="Lateef">Lateef</option>
+                    <option value="Scheherazade">Scheherazade</option>
+                    <option value="Uthmani">Uthmani</option>
+                    <option value="IndoPak">Indo-Pak</option>
+                </select>
+
+                <!-- Text Size Slider -->
+                <label for="text-size" class="block text-sm font-medium">Font Size</label>
+                <input type="range" id="text-size" min="20" max="48" value="28" class="w-full sm:w-32">
+            </div>
+        </div>
+
+        <!-- Play/Pause Button -->
+        <button id="play-pause" class="bg-green-500 px-4 py-2 rounded">Play</button>
+        <audio id="quran-audio"></audio>
+
+        <!-- Audio Range and Time Display -->
+        <div class="flex flex-col mt-4">
+            <input type="range" id="audio-range" class="w-full" min="0" max="100" value="0" step="1">
+            <div class="flex justify-between text-xs">
+                <span id="current-time">0:00</span>
+                <span id="duration-time">0:00</span>
+            </div>
+        </div>
+
+        <!-- Verses Container -->
+        <div id="verse-container" class="mt-6 space-y-4"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-center py-4 mt-8">
+        <p class="text-gray-300">© 2024 Dev-Adalz | Demo Quran Application</p>
+    </footer>
+
+    <script>
+        // Toggle the settings panel visibility
+        function toggleSettings() {
+            const panel = document.getElementById("settings-panel");
+            panel.classList.toggle("hidden");
+        }
+
+        // Preload Surah Al-Fatiha (1) on initial load
+        window.onload = () => {
+            document.getElementById('surah-select').value = 1; // Setting default to Surah 1
+            loadSurah(1); // Load Surah Al-Fatiha by default
+        };
+    </script>
+</body>
+</html>
