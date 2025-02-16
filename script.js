@@ -38,7 +38,7 @@ async function populateSurahDropdown() {
 // Load Surah by ID
 async function loadSurah(surahId) {
     try {
-        const url = `${API_BASE_URL}/verses/by_chapter/${surahId}?translations=131&fields=text_uthmani,text_indopak&transliterations=32&page=1&per_page=300`;
+        const url = `${API_BASE_URL}/verses/by_chapter/${surahId}?translations=131&fields=text_uthmani,text_indopak&transliterations=37&page=1&per_page=300`;
         const response = await fetch(url);
         const data = await response.json();
 
@@ -102,7 +102,8 @@ function displayVerses(verses, surahId) {
         const transliterationText = document.createElement('p');
         transliterationText.className = 'text-sm text-gray-300 mt-2';
         transliterationText.style.fontSize = '1.1rem';
-        transliterationText.innerText = verse.transliterations?.[0]?.text || '';
+        const transliteration = verse.transliterations && verse.transliterations.length > 0 ? verse.transliterations[0].text : '';
+        transliterationText.innerText = transliteration;
         transliterationText.style.display = document.getElementById('show-transliteration').checked ? 'block' : 'none';
 
         const translationText = document.createElement('p');
