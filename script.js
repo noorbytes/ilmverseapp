@@ -1,5 +1,5 @@
-const API_BASE_URL = 'https://api.quran.com/api/v4';
-const AUDIO_BASE_URL = 'https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal';
+const API_BASE_URL = 'https://api.alquran.cloud/v1';
+const AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128/ar.alafasy';
 
 const surahSelect = document.getElementById('surah-select');
 const qariSelect = document.getElementById('qari-select');
@@ -38,12 +38,37 @@ async function populateSurahDropdown() {
 // Load Surah by ID
 async function loadSurah(surahId) {
     try {
-        const url = `${API_BASE_URL}/verses/by_chapter/${surahId}?translations=131&fields=text_uthmani,text_indopak&transliterations=37&page=1&per_page=300`;
-    console.log('Fetching from URL:', url); // Debug log
-        const response = await fetch(url);
-        const data = await response.json();
+        // Fetch Arabic text
+        const arabicUrl = `${API_BASE_URL}/surah/${surahId}`;
+        const translationUrl = `${API_BASE_URL}/surah/${surahId}/en.sahih`;
+        const transliterationUrl = `${API_BASE_URL}/surah/${surahId}/en.transliteration`;
+        
+        console.log('Fetching from URLs:', { arabicUrl, translationUrl, transliterationUrl });
+        
+        const [arabicResponse, translationResponse, transliterationResponse] = await Promise.all([
+            fetch(arabicUrl),
+            fetch(translationUrl),
+            fetch(transliterationUrl)
+        ]);
+        
+        const [arabicData, translationData, transliterationData] = await Promise.all([
+            arabicResponse.json(),
+            translationResponse.json(),
+            transliterationResponse.json()
+        ]);
 
-        verses = data.verses;
+        verses = arabicData.data.ayahs.map((ayah, index) => ({
+            verse_number: ayah.numberInSurah,
+            verse_key: `${surahId}:${ayah.numberInSurah}`,
+            text_uthmani: ayah.text,
+            translations: [{
+                text: translationData.data.ayahs[index].text
+            }],
+            transliterations: [{
+                text: transliterationData.data.ayahs[index].text
+            }]
+        }));
+
         displayVerses(verses, surahId);
         setupAudio(surahId);
     } catch (error) {
