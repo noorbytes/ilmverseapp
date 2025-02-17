@@ -20,13 +20,13 @@ let isPlaying = false;
 // Populate Surah Dropdown
 async function populateSurahDropdown() {
     try {
-        const response = await fetch(`${API_BASE_URL}/chapters`);
+        const response = await fetch('https://api.alquran.cloud/v1/surah');
         const data = await response.json();
 
-        data.chapters.forEach(chapter => {
+        data.data.forEach(surah => {
             const option = document.createElement('option');
-            option.value = chapter.id;
-            option.textContent = `${chapter.id}. ${chapter.name_arabic} - ${chapter.name_simple}`;
+            option.value = surah.number;
+            option.textContent = `${surah.number}. ${surah.name} - ${surah.englishName}`;
             surahSelect.appendChild(option);
         });
 
