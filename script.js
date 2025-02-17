@@ -45,9 +45,9 @@ async function loadSurah(surahId) {
         window.history.pushState({}, '', newUrl);
 
         // Fetch Arabic text
-        const arabicUrl = `${API_BASE_URL}/surah/${surahId}`;
-        const translationUrl = `${API_BASE_URL}/surah/${surahId}/en.sahih`;
-        const transliterationUrl = `${API_BASE_URL}/surah/${surahId}/en.transliteration`;
+        const arabicUrl = `${API_BASE_URL}/quran/verses/uthmani?chapter_number=${surahId}`;
+        const translationUrl = `${API_BASE_URL}/quran/translations/131?chapter_number=${surahId}`;
+        const transliterationUrl = `${API_BASE_URL}/quran/translations/57?chapter_number=${surahId}`;
 
         console.log('Fetching from URLs:', { arabicUrl, translationUrl, transliterationUrl });
 
@@ -63,15 +63,15 @@ async function loadSurah(surahId) {
             transliterationResponse.json()
         ]);
 
-        verses = arabicData.data.ayahs.map((ayah, index) => ({
-            verse_number: ayah.numberInSurah,
-            verse_key: `${surahId}:${ayah.numberInSurah}`,
-            text_uthmani: ayah.text,
+        verses = arabicData.verses.map((verse, index) => ({
+            verse_number: verse.verse_number,
+            verse_key: `${surahId}:${verse.verse_number}`,
+            text_uthmani: verse.text_uthmani,
             translations: [{
-                text: translationData.data.ayahs[index].text
+                text: translationData.translations[index].text
             }],
             transliterations: [{
-                text: transliterationData.data.ayahs[index].text
+                text: transliterationData.translations[index].text
             }]
         }));
 
