@@ -79,22 +79,18 @@ async function loadSurah(surahId) {
 
 // Display Verses with Arabic and Translation
 function displayVerses(verses, surahId) {
-    console.log('Received verses:', verses); // Debug log
+    console.log('Received verses:', verses);
     verseContainer.innerHTML = '';
     verses.forEach((verse, index) => {
-        // Skip Bismillah for verses after first one
         if (verse.verse_key.endsWith('1') && index > 0) return;
-
-        console.log('Processing verse:', verse); // Debug log
 
         const verseBlock = document.createElement('div');
         verseBlock.className = 'p-4 border-b border-gray-700 verse-block';
         verseBlock.setAttribute('data-verse-number', verse.verse_number);
 
-        // Add verse number (e.g., 1:1)
         const verseNumberBadge = document.createElement('span');
         verseNumberBadge.className = 'inline-block bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-2';
-        verseNumberBadge.textContent = `${surahId}:${verse.verse_number}`;
+        verseNumberBadge.textContent = verse.verse_key;
         verseBlock.appendChild(verseNumberBadge);
 
         const arabicText = document.createElement('p');
@@ -159,12 +155,27 @@ function displayVerses(verses, surahId) {
 
 // Setup Audio for Selected Surah
 async function setupAudio(surahId) {
-    const formattedSurahId = surahId;
-    audioPlayer.src = `${AUDIO_BASE_URL}/${getQariPath(qariSelect.value)}/${String(surahId).padStart(3, '0')}.mp3`;
+    const formattedSurahId = String(surahId).padStart(3, '0');
+    const qariPath = getQariPath(qariSelect.value);
+    const audioUrl = `${AUDIO_BASE_URL}/${qariPath}/${formattedSurahId}.mp3`;
+    
+    console.log('Loading audio:', audioUrl);
+    audioPlayer.src = audioUrl;
     audioPlayer.load();
     currentVerseIndex = 0;
-    await fetchVerseDurations(surahId); // Fetch durations when loading the surah
-    audioPlayer.addEventListener('ended', playNextVerse); // Play next verse when audio ends
+    
+    // Update audio progress
+    audioPlayer.addEventListener('timeupdate', () => {
+        const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        audioRange.value = progress;
+        currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
+    });
+    
+    audioPlayer.addEventListener('loadedmetadata', () => {
+        durationTimeDisplay.textContent = formatTime(audioPlayer.duration);
+    });
+    
+    audioPlayer.addEventListener('ended', playNextVerse);
 }
 
 // Load Surah from URL
@@ -268,7 +279,13 @@ function populateQariOptions() {
         { id: 'ar.hudhaify', name: 'Ali Al-Hudhaify' },
         { id: 'ar.mahermuaiqly', name: 'Maher Al Muaiqly' },
         { id: 'ar.minshawi', name: 'Mohamed Siddiq El-Minshawi' },
-        { id: 'ar.abdulbasit', name: 'Abdul Basit' }
+        { id: 'ar.abdulbasit', name: 'Abdul Basit' },
+        { id: 'ar.husary', name: 'Mahmoud Khalil Al-Husary' },
+        { id: 'ar.muaiqly', name: 'Maher Al Muaiqly' },
+        { id: 'ar.rifai', name: 'Hani Ar-Rifai' },
+        { id: 'ar.shaatree', name: 'Abu Bakr Ash-Shaatree' },
+        { id: 'ar.shuraym', name: 'Sa`ud Ash-Shuraym' },
+        { id: 'ar.tablawi', name: 'Mohammad Al Tablawi' }
     ];
     
     qariSelect.innerHTML = qaris.map(qari => 
