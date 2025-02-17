@@ -1,5 +1,5 @@
-const API_BASE_URL = 'https://api.quran.com/api/v4';
-const AUDIO_BASE_URL = 'https://verses.quran.com';
+const API_BASE_URL = 'https://api.alquran.cloud/v1';
+const AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128';
 
 const surahSelect = document.getElementById('surah-select');
 const qariSelect = document.getElementById('qari-select');
@@ -45,9 +45,9 @@ async function loadSurah(surahId) {
         window.history.pushState({}, '', newUrl);
 
         // Fetch Arabic text
-        const arabicUrl = `${API_BASE_URL}/quran/verses/uthmani?chapter_number=${surahId}`;
-        const translationUrl = `${API_BASE_URL}/quran/translations/131?chapter_number=${surahId}`;
-        const transliterationUrl = `${API_BASE_URL}/quran/translations/57?chapter_number=${surahId}`;
+        const arabicUrl = `${API_BASE_URL}/surah/${surahId}`;
+        const translationUrl = `${API_BASE_URL}/surah/${surahId}/en.sahih`;
+        const transliterationUrl = `${API_BASE_URL}/surah/${surahId}/en.transliteration`;
 
         console.log('Fetching from URLs:', { arabicUrl, translationUrl, transliterationUrl });
 
@@ -63,15 +63,15 @@ async function loadSurah(surahId) {
             transliterationResponse.json()
         ]);
 
-        verses = arabicData.verses.map((verse, index) => ({
-            verse_number: verse.verse_number,
-            verse_key: `${surahId}:${verse.verse_number}`,
-            text_uthmani: verse.text_uthmani,
+        verses = arabicData.data.ayahs.map((ayah, index) => ({
+            verse_number: ayah.numberInSurah,
+            verse_key: `${surahId}:${ayah.numberInSurah}`,
+            text_uthmani: ayah.text,
             translations: [{
-                text: translationData.translations[index].text
+                text: translationData.data.ayahs[index].text
             }],
             transliterations: [{
-                text: transliterationData.translations[index].text
+                text: transliterationData.data.ayahs[index].text
             }]
         }));
 
@@ -161,7 +161,8 @@ function displayVerses(verses, surahId) {
 // Setup Audio for Selected Surah
 async function setupAudio(surahId) {
     const qariPath = getQariPath(qariSelect.value);
-    const audioUrl = `${AUDIO_BASE_URL}/${surahId}/recitations/${qariPath}/audio.mp3`;
+    const formattedSurahId = String(surahId).padStart(3, '0');
+    const audioUrl = `${AUDIO_BASE_URL}/${qariPath}/${formattedSurahId}.mp3`;
     
     console.log('Loading audio:', audioUrl);
     audioPlayer.src = audioUrl;
