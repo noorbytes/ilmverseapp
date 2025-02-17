@@ -122,27 +122,8 @@ function displayVerses(verses, surahId) {
         arabicText.style.fontFamily = fontSelect.value === 'IndoPak' ? 'Noto Naskh Arabic' : 'Amiri';
         arabicText.style.letterSpacing = fontSelect.value === 'IndoPak' ? '2px' : 'normal';
         arabicText.style.wordSpacing = fontSelect.value === 'IndoPak' ? '8px' : 'normal';
-                .then(data => {
-                    if (data.verses && data.verses.length > 0) {
-                        // Find the matching verse
-                        const matchingVerse = data.verses.find(v => v.verse_number === verse.verse_number);
-                        if (matchingVerse) {
-                            arabicText.innerText = matchingVerse.text_indopak;
-                        } else {
-                            arabicText.innerText = verse.text_uthmani;
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching Indo-Pak text:', error);
-                    arabicText.innerText = verse.text_uthmani;
-                });
-        } else {
-            arabicText.style.fontFamily = 'Amiri';
-            arabicText.style.letterSpacing = 'normal';
-            arabicText.style.wordSpacing = 'normal';
-            arabicText.innerText = verse.text_uthmani;
-        }
+
+        verseBlock.appendChild(arabicText);
 
         const transliterationText = document.createElement('p');
         transliterationText.className = 'text-sm text-gray-300 mt-2';
