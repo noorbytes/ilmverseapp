@@ -1,5 +1,5 @@
 const API_BASE_URL = 'https://api.alquran.cloud/v1';
-const AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128/ar.alafasy';
+const AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128';
 
 const surahSelect = document.getElementById('surah-select');
 const qariSelect = document.getElementById('qari-select');
@@ -42,15 +42,15 @@ async function loadSurah(surahId) {
         const arabicUrl = `${API_BASE_URL}/surah/${surahId}`;
         const translationUrl = `${API_BASE_URL}/surah/${surahId}/en.sahih`;
         const transliterationUrl = `${API_BASE_URL}/surah/${surahId}/en.transliteration`;
-        
+
         console.log('Fetching from URLs:', { arabicUrl, translationUrl, transliterationUrl });
-        
+
         const [arabicResponse, translationResponse, transliterationResponse] = await Promise.all([
             fetch(arabicUrl),
             fetch(translationUrl),
             fetch(transliterationUrl)
         ]);
-        
+
         const [arabicData, translationData, transliterationData] = await Promise.all([
             arabicResponse.json(),
             translationResponse.json(),
@@ -83,16 +83,18 @@ function displayVerses(verses, surahId) {
     verses.forEach((verse, index) => {
         // Skip Bismillah for verses after first one
         if (verse.verse_key.endsWith('1') && index > 0) return;
-        
-        console.log('Processing verse:', verse); // Debug log
-        
-        const verseBlock = document.createElement('div');
-        verseBlock.className = 'p-4 border-b border-gray-700';
-        verseBlock.id = `verse-${verse.verse_number}`;
 
-        const verseNumberText = document.createElement('span');
-        verseNumberText.className = 'font-bold text-lg mr-2';
-        verseNumberText.innerText = `${surahId}:${verse.verse_number}`;
+        console.log('Processing verse:', verse); // Debug log
+
+        const verseBlock = document.createElement('div');
+        verseBlock.className = 'p-4 border-b border-gray-700 verse-block';
+        verseBlock.setAttribute('data-verse-number', verse.verse_number);
+
+        // Add verse number (e.g., 1:1)
+        const verseNumberBadge = document.createElement('span');
+        verseNumberBadge.className = 'inline-block bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-2';
+        verseNumberBadge.textContent = `${surahId}:${verse.verse_number}`;
+        verseBlock.appendChild(verseNumberBadge);
 
         const arabicText = document.createElement('p');
         arabicText.className = 'arabic-text mb-2';
@@ -146,7 +148,7 @@ function displayVerses(verses, surahId) {
         translationText.style.fontSize = '1.25rem';
         translationText.innerText = verse.translations[0].text.replace(/<sup[^>]*>.*?<\/sup>/g, '').trim();
 
-        verseBlock.appendChild(verseNumberText);
+        verseBlock.appendChild(verseNumberBadge);
         verseBlock.appendChild(arabicText);
         verseBlock.appendChild(transliterationText);
         verseBlock.appendChild(translationText);
@@ -157,11 +159,10 @@ function displayVerses(verses, surahId) {
 // Setup Audio for Selected Surah
 async function setupAudio(surahId) {
     const formattedSurahId = surahId;
-    
-
-    audioPlayer.src = `${AUDIO_BASE_URL}/${formattedSurahId}.mp3`;
+    audioPlayer.src = `${AUDIO_BASE_URL}/${getQariPath(qariSelect.value)}/${String(surahId).padStart(3, '0')}.mp3`;
     audioPlayer.load();
     currentVerseIndex = 0;
+    await fetchVerseDurations(surahId); // Fetch durations when loading the surah
     audioPlayer.addEventListener('ended', playNextVerse); // Play next verse when audio ends
 }
 
@@ -205,15 +206,6 @@ async function getAudioDuration(audioSrc) {
     });
 }
 
-// Setup Audio for Selected Surah
-async function setupAudio(surahId) {
-    const formattedSurahId = surahId;
-    audioPlayer.src = `${AUDIO_BASE_URL}/${formattedSurahId}.mp3`;
-    audioPlayer.load();
-    currentVerseIndex = 0;
-    await fetchVerseDurations(surahId); // Fetch durations when loading the surah
-    audioPlayer.addEventListener('ended', playNextVerse); // Play next verse when audio ends
-}
 
 // Play Next Verse
 async function playNextVerse() {
@@ -236,47 +228,33 @@ async function playNextVerse() {
 
 // Highlight and Smooth Scroll
 function highlightAndScrollToVerse(verseNumber) {
-    document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
-    const activeEl = document.getElementById(`verse-${verseNumber}`);
-    if (activeEl) {
-        activeEl.classList.add('active');
-        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    document.querySelectorAll('.verse-block').forEach(el => {
+        el.classList.remove('active');
+        if (parseInt(el.getAttribute('data-verse-number')) === verseNumber) {
+            el.classList.add('active');
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    });
 }
 
-
-// Play Next Verse
-async function playNextVerse() {
-    if (currentVerseIndex < verses.length - 1) {
-        currentVerseIndex++;
-        audioPlayer.src = `${AUDIO_BASE_URL}${getQariPath(qariSelect.value)}/${String(verses[currentVerseIndex].verse_number).padStart(3, '0')}.mp3`;
-        audioPlayer.play();
-        highlightAndScrollToVerse(verses[currentVerseIndex].verse_number);
-    } else {
-        isPlaying = false;
-        playPauseButton.textContent = 'Play';
-    }
-}
 
 // Get Qari Path
 function getQariPath(qari) {
     switch (qari) {
-        case 'Alafasy':
-            return 'mishaari_raashid_al_3afaasee';
-        case 'Husary':
-            return 'mahmood_khaleel_al-husaree_iza3a';
+        case 'ar.alafasy':
+            return 'ar.alafasy';
+        case 'ar.abdurrahmaansudais':
+            return 'ar.abdurrahmaansudais';
+        case 'ar.hudhaify':
+            return 'ar.hudhaify';
+        case 'ar.mahermuaiqly':
+            return 'ar.mahermuaiqly';
+        case 'ar.minshawi':
+            return 'ar.minshawi';
+        case 'ar.abdulbasit':
+            return 'ar.abdulbasit';
         default:
-            return 'abdul_basit_murattal';
-    }
-}
-
-// Highlight and Smooth Scroll
-function highlightAndScrollToVerse(verseNumber) {
-    document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
-    const activeEl = document.getElementById(`verse-${verseNumber}`);
-    if (activeEl) {
-        activeEl.classList.add('active');
-        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return 'ar.alafasy'; // Default to Alafasy
     }
 }
 
