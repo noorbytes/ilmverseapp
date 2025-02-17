@@ -39,6 +39,11 @@ async function populateSurahDropdown() {
 // Load Surah by ID
 async function loadSurah(surahId) {
     try {
+        // Update URL without reloading
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('id', surahId);
+        window.history.pushState({}, '', newUrl);
+
         // Fetch Arabic text
         const arabicUrl = `${API_BASE_URL}/surah/${surahId}`;
         const translationUrl = `${API_BASE_URL}/surah/${surahId}/en.sahih`;
@@ -300,7 +305,11 @@ function formatTime(seconds) {
 }
 
 // Event Listeners
-surahSelect.addEventListener('change', () => loadSurah(surahSelect.value));
+surahSelect.addEventListener('change', (e) => {
+    const selectedSurahId = e.target.value;
+    loadSurah(selectedSurahId);
+    verseContainer.scrollTop = 0; // Reset scroll position
+});
 qariSelect.addEventListener('change', () => setupAudio(surahSelect.value));
 fontSelect.addEventListener('change', () => displayVerses(verses, surahSelect.value));
 textSizeSlider.addEventListener('input', () => displayVerses(verses, surahSelect.value));
