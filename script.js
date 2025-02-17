@@ -3,6 +3,7 @@ const AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128';
 
 const surahSelect = document.getElementById('surah-select');
 const qariSelect = document.getElementById('qari-select');
+let currentAudio = null;
 const fontSelect = document.getElementById('font-select');
 const textSizeSlider = document.getElementById('text-size');
 const verseContainer = document.getElementById('verse-container');
@@ -176,11 +177,19 @@ function loadSurahFromURL() {
 
 // Play or Pause the Audio
 function toggleAudio() {
+    if (!audioPlayer.src) {
+        setupAudio(surahSelect.value);
+    }
+    
     if (isPlaying) {
         audioPlayer.pause();
         playPauseButton.textContent = 'Play';
     } else {
-        audioPlayer.play();
+        audioPlayer.play().catch(error => {
+            console.error('Error playing audio:', error);
+            playPauseButton.textContent = 'Play';
+            isPlaying = false;
+        });
         playPauseButton.textContent = 'Pause';
     }
     isPlaying = !isPlaying;
@@ -240,22 +249,31 @@ function highlightAndScrollToVerse(verseNumber) {
 
 // Get Qari Path
 function getQariPath(qari) {
-    switch (qari) {
-        case 'ar.alafasy':
-            return 'ar.alafasy';
-        case 'ar.abdurrahmaansudais':
-            return 'ar.abdurrahmaansudais';
-        case 'ar.hudhaify':
-            return 'ar.hudhaify';
-        case 'ar.mahermuaiqly':
-            return 'ar.mahermuaiqly';
-        case 'ar.minshawi':
-            return 'ar.minshawi';
-        case 'ar.abdulbasit':
-            return 'ar.abdulbasit';
-        default:
-            return 'ar.alafasy'; // Default to Alafasy
-    }
+    const qaris = {
+        'ar.alafasy': 'ar.alafasy',
+        'ar.abdurrahmaansudais': 'ar.abdurrahmaansudais',
+        'ar.hudhaify': 'ar.hudhaify',
+        'ar.mahermuaiqly': 'ar.mahermuaiqly',
+        'ar.minshawi': 'ar.minshawi',
+        'ar.abdulbasit': 'ar.abdulbasit'
+    };
+    return qaris[qari] || 'ar.alafasy';
+}
+
+// Add qari options
+function populateQariOptions() {
+    const qaris = [
+        { id: 'ar.alafasy', name: 'Mishary Alafasy' },
+        { id: 'ar.abdurrahmaansudais', name: 'Abdurrahman As-Sudais' },
+        { id: 'ar.hudhaify', name: 'Ali Al-Hudhaify' },
+        { id: 'ar.mahermuaiqly', name: 'Maher Al Muaiqly' },
+        { id: 'ar.minshawi', name: 'Mohamed Siddiq El-Minshawi' },
+        { id: 'ar.abdulbasit', name: 'Abdul Basit' }
+    ];
+    
+    qariSelect.innerHTML = qaris.map(qari => 
+        `<option value="${qari.id}">${qari.name}</option>`
+    ).join('');
 }
 
 // Format Time in Minutes:Seconds
@@ -290,3 +308,17 @@ document.getElementById('show-transliteration').addEventListener('change', (e) =
 
 // Initialize the App
 populateSurahDropdown();
+populateQariOptions();
+
+// Event listener for audio ended
+audioPlayer.addEventListener('ended', () => {
+    playPauseButton.textContent = 'Play';
+    isPlaying = false;
+});
+
+// Event listener for audio errors
+audioPlayer.addEventListener('error', () => {
+    console.error('Audio error:', audioPlayer.error);
+    playPauseButton.textContent = 'Play';
+    isPlaying = false;
+});
