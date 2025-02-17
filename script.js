@@ -1,5 +1,5 @@
-const API_BASE_URL = 'https://api.alquran.cloud/v1';
-const AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128';
+const API_BASE_URL = 'https://api.quran.com/api/v4';
+const AUDIO_BASE_URL = 'https://verses.quran.com';
 
 const surahSelect = document.getElementById('surah-select');
 const qariSelect = document.getElementById('qari-select');
@@ -160,9 +160,8 @@ function displayVerses(verses, surahId) {
 
 // Setup Audio for Selected Surah
 async function setupAudio(surahId) {
-    const formattedSurahId = String(surahId).padStart(3, '0');
     const qariPath = getQariPath(qariSelect.value);
-    const audioUrl = `${AUDIO_BASE_URL}/${qariPath}/${formattedSurahId}.mp3`;
+    const audioUrl = `${AUDIO_BASE_URL}/${surahId}/recitations/${qariPath}/audio.mp3`;
     
     console.log('Loading audio:', audioUrl);
     audioPlayer.src = audioUrl;
