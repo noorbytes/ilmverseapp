@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Reader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="tafsir.js"></script>
+
+    <style>
+        .arabic-text {
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        .bismillah {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            color: #10b981;
+        }
+        /* Add smooth scrolling to container */
+        .verse-container {
+            scroll-behavior: smooth;
+        }
+        
+        /* Active verse styling */
+        .verse-block.active {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Improve Arabic text readability */
+        .arabic-text {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 2.25rem;
+            line-height: 2.5;
+            letter-spacing: 0.5px;
+            word-spacing: 3px;
+        }
+
+        /* Sidebar specific styles */
+        .sidebar {
+            width: 300px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #1a1f2e;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #2d3748;
+        }
+
+        /* Single column row styles */
+        .sidebar-row {
+            height: 50%;
+            border-bottom: 1px solid #2d3748;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-container {
+            padding: 0.75rem;
+            background: #161b26;
+            border-bottom: 1px solid #2d3748;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            background: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 0.375rem;
+            color: #e2e8f0;
+            font-size: 0.875rem;
+        }
+
+        .list-container {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #4b5568 #1f2937;
+        }
+
+        .list-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #2d3748;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .list-item:hover {
+            background: #2d3748;
+        }
+
+        .list-item.active {
+            background: #2d3748;
+            border-left: 3px solid #10b981;
+        }
+
+        .item-number {
+            color: #10b981;
+            font-weight: 500;
+            min-width: 2rem;
+        }
+
+        /* Main content adjustment */
+        .main-content {
+            margin-left: 300px;
+        }
+
+        /* Hide sidebar on mobile */
+        @media (max-width: 1024px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+    <script src="tafsir.js"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div id="toast-container" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"></div>
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 z-50 flex flex-col items-center justify-center">
+        <div class="text-center max-w-2xl px-4">
+            <div class="inline-block animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500 mb-8"></div>
+            <h2 class="text-3xl font-bold text-emerald-500 mb-4">Loading...</h2>
+            <div id="loading-status" class="text-gray-400 text-lg mb-8">Preparing your reading experience</div>
+            <div class="mt-8">
+                <div id="quote-display" class="text-gray-400 italic text-lg">
+                    <!-- Quotes will be displayed here -->
+                </div>
+                <div class="text-gray-500 mt-2 text-sm">
+                    <span id="quote-reference"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated Sidebar Structure -->
+    <div class="sidebar">
+        <!-- Surah List Row -->
+        <div class="sidebar-row">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    class="search-box"
+                    placeholder="Search surah..." 
+                    id="surah-search"
+                >
+            </div>
+            <div class="list-container" id="surah-list">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Verse List Row -->
+        <div class="sidebar-row">
+            <div class="search-container">
+                <input 
+                    type="number" 
+                    class="search-box"
+                    placeholder="Go to verse..." 
+                    id="verse-search"
+                    min="1"
+                >
+            </div>
+            <div class="list-container" id="verse-list">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Adjust main content -->
+    <div class="main-content">
+        <nav class="bg-gray-800 p-4 sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <a href="index.html" class="text-emerald-500 hover:text-emerald-400 flex items-center gap-2">
+                    <i class="fas fa-home text-xl"></i>
+                    <span class="text-sm hidden md:inline"></span>
+                </a>
+                
+            </div>
+        </nav>
+
+        <main class="max-w-4xl mx-auto p-4 pb-32"> <!-- Added pb-32 for extra padding -->
+            <div id="verses-container" class="space-y-6">
+                <!-- Verses will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Media Controller Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 z-50">
+        <div class="max-w-4xl mx-auto p-4">
+            <div class="flex flex-col gap-2">
+                <!-- Progress bar -->
+                <div class="flex items-center gap-4 text-sm text-gray-400">
+                    <span id="current-time">0:00</span>
+                    <div class="flex-grow h-2 bg-gray-700 rounded-full cursor-pointer" id="progress-container">
+                        <div class="h-full bg-emerald-500 rounded-full transition-all duration-100" id="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span id="total-time">0:00</span>
+                </div>
+                
+                <!-- Controls -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <button id="play-all" class="bg-emerald-500 hover:bg-emerald-600 w-12 h-12 rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <span id="playing-verse" class="text-sm text-gray-400">Verse: 1</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button id="prev-verse" class="text-gray-400 hover:text-white">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button id="next-verse" class="text-gray-400 hover:text-white">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="verse.js"></script>
+    <script src="quotes.js"></script>
+    <script>
+        // Update verse tracking
+        let currentVerseElement = null;
+
+        // Update verse highlight and scroll
+        function updateVerseHighlight(verseKey) {
+            // Remove previous highlight
+            if (currentVerseElement) {
+                currentVerseElement.classList.remove('active');
+            }
+
+            // Add new highlight
+            currentVerseElement = document.querySelector(`[data-verse-key="${verseKey}"]`);
+            if (currentVerseElement) {
+                currentVerseElement.classList.add('active');
+                
+                // Scroll into view with offset
+                const container = document.getElementById('verse-container');
+                const containerRect = container.getBoundingClientRect();
+                const elementRect = currentVerseElement.getBoundingClientRect();
+                
+                container.scrollTo({
+                    top: currentVerseElement.offsetTop - containerRect.height/3,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Add to your existing verse rendering
+        function renderVerse(verse, index) {
+            return `
+                <div class="verse-block relative p-6" 
+                     id="verse-${verse.verse_number}"
+                     data-verse-key="${verse.verse_key}">
+                    <div class="verse-number-badge absolute left-4 top-4 bg-gray-700 rounded-full w-10 h-10 flex items-center justify-center text-sm text-emerald-400">
+                        ${verse.verse_key}
+                    </div>
+                    <div class="verse-content pl-16 pr-4">
+                        <button class="play-verse-btn absolute right-4 top-4 text-gray-400 hover:text-emerald-400"
+                                data-verse-index="${index}"
+                                data-verse-key="${verse.verse_key}">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="arabic-text" dir="rtl">
+                            ${verse.text_uthmani}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,982 @@
+/* Glassmorphism UI */
+body {
+    font-family: 'Noto Sans Arabic', 'Amiri', sans-serif;
+    background: #fff;
+    color: #323232;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #fff;
+    padding: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#search {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-dark);
+    color: white;
+    font-size: 1rem;
+}
+
+#search:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Updated surah list styles */
+#surah-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    height: calc(100vh - 116px);
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 #1f2937;
+}
+
+#surah-list::-webkit-scrollbar {
+    width: 6px;
+}
+/* Add these styles to your existing CSS */
+.sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+@media (min-width: 1024px) {
+    .sidebar {
+        transform: none;
+    }
+}
+
+.translate-x-0 {
+    transform: translateX(0);
+}
+
+#sidebar-toggle {
+    transition: all 0.3s ease;
+}
+
+#sidebar-toggle:hover {
+    background-color: rgba(55, 65, 81, 0.9);
+}
+
+#sidebar-overlay {
+    transition: opacity 0.3s ease;
+}
+#surah-list::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+#surah-list::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 3px;
+}
+
+.surah-card {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+}
+
+.surah-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: var(--verse-hover);
+}
+
+.surah-card::before {
+    content: "بِسْمِ ٱللّٰهِ";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-10deg);
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 2em;
+    opacity: 0.05;
+    color: #fff;
+}
+
+.surah-number {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.surah-card h3 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #323232;
+    text-align: left;
+    font-weight: 500;
+}
+
+.surah-card p {
+    margin: 4px 0 0;
+    color: #666;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.arabic-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-left: auto;
+}
+
+.surah-info {
+    text-align: left;
+}
+
+.surah-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 0;
+}
+
+.surah-details {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin: 0.25rem 0 0;
+}
+
+.search-container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+}
+
+.word-by-word {
+    display: inline-block;
+    position: relative;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+.word-by-word .translation {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2d3748;
+    padding: 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.word-by-word:hover .translation {
+    display: block;
+}
+
+.bismillah {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    color: var(--primary-color);
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background-color: #4b5563;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: #60a5fa;
+    transition: width 0.1s linear;
+}
+
+/* Add media queries for responsiveness */
+@media screen and (max-width: 1024px) {
+    #surah-list {
+        height: calc(100vh - 100px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #surah-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+:root {
+    --primary-color: #10b981;
+    --verse-border: #343c46;
+    --verse-hover: #2a333c;
+    --bg-dark: #1f2937;
+    --border-color: #374151;
+}
+
+/* Base styles for Arabic text (mobile) */
+.arabic-text {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 1.75rem;  /* Smaller size for mobile */
+    line-height: 2.5;
+    text-align: right;
+    letter-spacing: 0.5px;
+    word-spacing: 6px;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+/* All larger screens (tablets and above) */
+@media screen and (min-width: 768px) {
+    .arabic-text {
+        font-size: 3rem;     /* Fixed larger size for all desktop views */
+        line-height: 2.75;
+        word-spacing: 12px;
+        letter-spacing: 0.75px;
+    }
+
+    .translation {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        padding-left: 2rem;
+    }
+
+    .transliteration {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        margin: 1.25rem 0;
+    }
+}
+
+.verse-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.verse-block {
+    position: relative;
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    background: rgba(31, 41, 55, 0.3);
+    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.verse-block:hover {
+    background-color: var(--verse-hover);
+    background: rgba(31, 41, 55, 0.8);
+    transform: translateY(-2px);
+}
+
+.verse-number {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    height: 2rem;
+}
+
+.verse-number-badge {
+    font-size: 1rem;  /* Increased badge text size */
+    width: 3rem;      /* Increased badge size */
+    height: 3rem;
+    left: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #10b981; /* emerald-400 color */
+    font-weight: 500;
+}
+
+.verse-actions {
+    opacity: 0;
+    transition: opacity 0.2s;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.verse-block:hover .verse-actions {
+    opacity: 1;
+}
+
+.verse-translation {
+    color: #94a3b8;  /* Slate-400 */
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+}
+
+.word-by-word {
+    display: inline-block;
+    position: relative;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+.word-by-word .meaning {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #374151;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.word-by-word:hover .meaning {
+    display: block;
+}
+
+.bismillah {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    color: var(--primary-color);
+}
+
+.surah-info {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 3rem;
+    padding: 2rem;
+}
+
+.surah-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.surah-meta {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.audio-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1f2937;
+    padding: 1rem;
+    border-top: 1px solid var(--verse-border);
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Hide scrollbar but allow scrolling */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Active verse highlight */
+.verse-block.active {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-radius: 0.5rem;
+    background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Make container wider */
+.container, main {
+    max-width: 1200px !important;  /* Increased from previous max-width */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Adjust surah info header */
+.surah-info h1 {
+    font-size: 3.5rem;  /* Increased title size */
+    margin-bottom: 1rem;
+}
+
+.transliteration {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #94a3b8;
+    margin: 1rem 0;
+    padding: 0.75rem 0;
+    text-align: left;
+    font-style: italic;
+    border-bottom: 1px solid rgba(100, 116, 139, 0.1);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin: 1rem 0;
+    line-height: 1.6;
+    font-style: italic;
+    padding-left: 0.5rem;
+}
+
+.translation {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.75;
+    color: #e2e8f0;
+    padding-left: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e2e8f0;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(16, 185, 129, 0.2);
+    margin-top: 1rem;
+}
+
+/* Add smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Improved spacing */
+.space-y-6 > * + * {
+    margin-top: 2rem;
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+    .arabic-text {
+        font-size: 1.8rem;
+        line-height: 2.2;
+        letter-spacing: 0.5px;
+        word-spacing: 4px;
+    }
+}
+
+/* Desktop screens */
+@media (min-width: 769px) {
+    .arabic-text {
+        font-size: 2.5rem;
+        line-height: 2.5;
+        letter-spacing: 0.8px;
+        word-spacing: 8px;
+    }
+
+    .verse-block {
+        padding: 3rem 2rem;
+    }
+}
+
+/* Verse content spacing */
+.verse-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Surah header styling */
+.surah-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.surah-title-arabic {
+    font-size: 2.5rem;
+    color: #10b981;
+    margin-bottom: 0.5rem;
+}
+
+.surah-title-english {
+    font-size: 1.5rem;
+    color: #e2e8f0;
+    margin-bottom: 0.5rem;
+}
+
+.surah-info {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Container width */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Base text styles with mobile-first approach */
+.arabic-text {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    text-align: right;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Mobile screens */
+@media (max-width: 767px) {
+    .arabic-text {
+        font-size: 1.8rem !important;
+        line-height: 2.2;
+        letter-spacing: 0.5px;
+        word-spacing: 4px;
+    }
+}
+
+/* Desktop and larger screens (override previous styles) */
+@media (min-width: 768px) {
+    .arabic-text {
+        font-size: 1.8rem !important;
+        line-height: 0.8;
+        letter-spacing: 0.8px;
+        word-spacing: 0.8px;
+    }
+    
+    .verse-block {
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .translation {
+        font-size: 1.25rem;
+        line-height: 1.8;
+    }
+
+    .transliteration {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+}
+
+/* Large desktop screens */
+@media (min-width: 1440px) {
+    .arabic-text {
+        font-size: 3rem !important;
+        line-height: 2.75;
+        word-spacing: 10px;
+    }
+}
+
+/* Force styles to override any inline styles */
+.verse-block {
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+    background: rgba(31, 41, 55, 0.3) !important;
+}
+
+.arabic-text {
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile-first verse styling */
+.verse-block {
+    position: relative;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(31, 41, 55, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.verse-number {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 1rem;
+    min-width: 3.5rem;
+    text-align: center;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Base text styles for mobile */
+.arabic-text {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 1.75rem;
+    line-height: 2.5;
+    text-align: right;
+    margin: 1rem 0;
+}
+
+.translation {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+}
+
+.transliteration {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.5rem 0;
+}
+
+/* Tablet and larger screens */
+@media (min-width: 768px) {
+    .verse-block {
+        padding: 1.5rem;
+    }
+
+    .verse-number {
+        font-size: 1.1rem;
+    }
+
+    .arabic-text {
+        font-size: 2rem;
+    }
+
+    .translation {
+        font-size: 1.1rem;
+    }
+
+    .transliteration {
+        font-size: 1rem;
+    }
+}
+
+/* Desktop screens */
+@media (min-width: 1024px) {
+    .verse-block {
+        padding: 2rem;
+    }
+
+    .arabic-text {
+        font-size: 2.25rem;
+    }
+
+    .translation {
+        font-size: 1.25rem !important;
+        line-height: 1.9;
+        padding-left: 2rem;
+        margin-top: 1.5rem;
+    }
+
+    .tafsir-text {
+        font-size: 1.25rem !important;
+        line-height: 1.9;
+        max-width: 80ch;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    .tafsir-text p {
+        margin-bottom: 1rem;
+    }
+
+    .transliteration {
+        font-size: 1.2rem !important;
+        line-height: 1.8;
+        margin: 1.5rem 0;
+        padding: 1rem 0;
+    }
+
+    /* Make the tafsir container more spacious */
+    .tafsir-content {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: rgba(31, 41, 55, 0.3);
+        border-radius: 0.75rem;
+    }
+
+    /* Make the tafsir header more prominent */
+    .tafsir-content h4 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Large desktop screens */
+@media (min-width: 1440px) {
+    .arabic-text {
+        font-size: 3rem !important;
+        line-height: 2.75;
+        word-spacing: 10px;
+    }
+}
+
+/* Add styles for ultra-wide screens */
+@media (min-width: 1536px) {
+    .translation, .tafsir-text {
+        font-size: 1.35rem !important;
+        line-height: 2;
+    }
+}
+
+#verse-list {
+    height: calc(100vh - 116px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 #1f2937;
+}
+
+#verse-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#verse-list::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+#verse-list::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 3px;
+}
+
+/* Updated sidebar list styles */
+.list-item {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #2d3748;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.list-item .number {
+    color: #10b981;
+    font-weight: 500;
+    min-width: 2rem;
+}
+
+.list-item .name {
+    color: #e2e8f0;
+    font-size: 0.875rem;
+}
+
+.list-item:hover {
+    background: #2d3748;
+}
+
+.list-item.active {
+    background: #2d3748;
+    border-left: 3px solid #10b981;
+}
+
+/* Add these new styles */
+#quote-display, #quote-reference {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.disable-selection {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Add styles for verse text selection */
+.verse-block.playing .arabic-text {
+    background-color: rgba(16, 185, 129, 0.08);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.verse-block.playing .translation,
+.verse-block.playing .transliteration {
+    background-color: rgba(16, 185, 129, 0.05);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+/* Smooth transition for text selection */
+.verse-block .arabic-text,
+.verse-block .translation,
+.verse-block .transliteration {
+    transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+/* Add these styles for the loading overlay */
+#loading-overlay {
+    transition: opacity 0.5s ease;
+    backdrop-filter: blur(5px);
+}
+
+.animate-spin {
+    animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Optimize tafsir styles for better performance */
+.tafsir-content {
+    /* Use transform for better performance instead of all */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    will-change: transform, opacity;
+}
+
+.tafsir-text {
+    /* Use hardware acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    font-size: 1.25rem !important;
+    line-height: 1.9;
+}
+
+/* Optimize loading animation */
+.animate-pulse {
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    will-change: opacity;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .5; }
+}
+
+/* Add these new styles for tafsir */
+.tafsir-content {
+    transition: all 0.3s ease;
+}
+
+.tafsir-btn {
+    transition: transform 0.2s ease;
+}
+
+.tafsir-btn:hover {
+    transform: scale(1.1);
+}
+
+.tafsir-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    text-align: left;
+}
+
+/* Fix content padding for media player */
+.main-content {
+    padding-bottom: 120px !important; /* Add space for media player */
+}
+
+main {
+    margin-bottom: 3rem !important; /* Extra margin at the bottom */
+}
+
+/* Ensure media player stays at bottom */
+.fixed.bottom-0 {
+    z-index: 50;
+}
+
+/* Updated verse block margin */
+.verse-block:last-child {
+    margin-bottom: 6rem; /* Extra margin for last verse */
+}
+
+/* Add styles for share button and toast */
+.share-btn {
+    transition: transform 0.2s ease;
+}
+
+.share-btn:hover {
+    transform: scale(1.1);
+}
+
+.share-btn:active {
+    transform: scale(0.95);
+}
+
+/* Toast notification animation */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, 20px); }
+    10% { opacity: 1; transform: translate(-50%, 0); }
+    90% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+/* Add these styles at the end of the file */
+#toast-container {
+    pointer-events: none;
+}
+
+#toast-container > div {
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translate(-50%, -20px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.back-home {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.back-home:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #c8b273;
+}
+
+.back-home i {
+    font-size: 1.2rem;
+}

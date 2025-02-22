@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadith Collections</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <nav class="fixed top-4 right-4 z-50">
+        <a href="../" class="home-button">
+            <i class="fas fa-home"></i>
+        </a>
+    </nav>
+    <div id="error-message" class="error-message"></div>
+    <div id="loading" class="loading">Loading...</div>
+    <div class="overlay"></div>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Top half of sidebar -->
+            <div class="sidebar-top">
+                <!-- Collection select with sticky position -->
+                <div class="sticky-header">
+                    <select id="collection-select" class="collection-select">
+                        <option value="bukhari">Sahih al-Bukhari</option>
+                        <option value="muslim">Sahih Muslim</option>
+                        <option value="abudawud">Abu Dawud</option>
+                        <option value="tirmidhi">Al-Tirmidhi</option>
+                        <option value="nasai">An-Nasa'i</option>
+                        <option value="ibnmajah">Ibn Majah</option>
+                    </select>
+                    <!-- Add chapter number search -->
+                    <input type="number" 
+                           id="chapter-search"
+                           class="number-search mt-2" 
+                           placeholder="Search chapter number..."
+                           min="1">
+                </div>
+                <div id="chapter-list"></div>
+            </div>
+
+            <!-- Bottom half of sidebar -->
+            <div class="sidebar-bottom">
+                <div class="hadith-number-search">
+                    <input type="number" 
+                           id="number-search"
+                           class="number-search" 
+                           placeholder="Search hadith number..."
+                           min="1">
+                    <div id="number-list" class="number-list"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Main search bar -->
+            <div class="main-search">
+                <input type="text" 
+                       id="main-search"
+                       class="search-input"
+                       placeholder="Search hadith text...">
+                <div id="search-results" class="search-results"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Chapter title -->
+                <div id="chapter-title" class="mb-8"></div>
+
+                <!-- Hadith list -->
+                <div id="hadith-list" class="space-y-8"></div>
+
+                <!-- Loading indicator -->
+                <div id="loading" class="hidden">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500 mx-auto"></div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-8 space-x-4" id="pagination">
+                    <!-- Pagination controls will be added here -->
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Global error handler
+        window.addEventListener('unhandledrejection', function(event) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = `Error: ${event.reason.message}`;
+            errorDiv.classList.remove('hidden');
+        });
+    </script>
+    <script src="chapter-service.js"></script>
+    <script src="hadith-service.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

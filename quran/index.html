@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Noble Quran</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <!-- Add home button navigation -->
+    <nav class="fixed top-4 right-4 z-50">
+        <a href="../" class="home-icon">
+            <i class="fas fa-home"></i>
+        </a>
+    </nav>
+
+    <nav class="bg-gray-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-emerald-500">الْقُرْآن</span>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Search Bar -->
+        <div class="relative max-w-xl mx-auto mb-8">
+            <input 
+                type="text" 
+                id="search-input"
+                placeholder="Search surah by name or number..."
+                class="w-full px-4 py-3 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+            >
+            <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        </div>
+
+        <!-- Updated Surah Grid with correct links -->
+        <div id="surah-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Surah cards will be inserted here -->
+        </div>
+    </main>
+
+    <style>
+        .home-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 50%;
+            color: #10b981;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .home-icon:hover {
+            background: rgba(16, 185, 129, 0.2);
+            transform: scale(1.1);
+        }
+
+        .home-icon i {
+            font-size: 1.2rem;
+        }
+    </style>
+
+    <script>
+        const API_BASE = 'https://api.quran.com/api/v4';
+        let surahs = [];
+
+        async function loadSurahs() {
+            try {
+                const response = await fetch(`${API_BASE}/chapters`);
+                const data = await response.json();
+                surahs = data.chapters;
+                displaySurahs(surahs);
+            } catch (error) {
+                console.error('Error loading surahs:', error);
+            }
+        }
+
+        function displaySurahs(surahList) {
+            const grid = document.getElementById('surah-grid');
+            grid.innerHTML = surahList.map(surah => `
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors duration-200">
+                    <a href="surah.html?id=${surah.id}" class="flex items-center gap-4 group relative overflow-hidden">
+                        <div class="w-12 h-12 bg-emerald-900 rounded-full flex items-center justify-center text-emerald-400 font-bold group-hover:bg-emerald-800">
+                            ${surah.id}
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-bold text-lg text-white">${surah.name_simple}</h3>
+                                <span class="text-2xl text-emerald-500 font-arabic">${surah.name_arabic}</span>
+                            </div>
+                            <p class="text-sm text-gray-400">${surah.verses_count} Verses • ${surah.revelation_place}</p>
+                            ${surah.translated_name ? 
+                                `<p class="text-xs text-gray-500 mt-1">${surah.translated_name.name}</p>` : 
+                                ''}
+                        </div>
+                        <div class="absolute inset-0 bg-emerald-500 opacity-0 group-hover:opacity-5 transition-opacity duration-200"></div>
+                    </a>
+                   
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Search functionality
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = surahs.filter(surah => 
+                surah.name_simple.toLowerCase().includes(searchTerm) ||
+                surah.name_arabic.includes(searchTerm) ||
+                surah.id.toString().includes(searchTerm)
+            );
+            displaySurahs(filtered);
+        });
+
+        // Load surahs when page loads
+        loadSurahs();
+    </script>
+</body>
+</html>

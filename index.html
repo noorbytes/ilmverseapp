@@ -1,72 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Quran app</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        body {
-            font-family: 'Amiri', serif;
-        }
-        .surah-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+    <title>IlmVerse</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- Navigation Bar -->
-    <nav class="bg-gray-800 p-4">
-        <div class="flex justify-between">
-            <div class="text-xl font-bold">Demo Quran app</div>
-            <div class="space-x-4">
-                <a href="index.html" class="text-gray-300 hover:text-white">Home</a>
-                <a href="#" class="text-gray-300 hover:text-white">About</a>
+<body>
+    <header>
+        <nav>
+            <div class="logo">IlmVerse</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#Guthub">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="arabic-title">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+            <h1>Explore the Divine Words</h1>
+            <button class="cta-button">Begin Journey</button>
+        </section>
+
+        <section id="features">
+            <div class="feature">
+                <i class="fas fa-quran feature-icon"></i>
+                <h3>Al-Quran</h3>
+                <ul>
+                    <li>Complete Quran text</li>
+                    <li>English translation</li>
+                    <li>Audio recitations</li>
+                </ul>
+                <a href="quran/" class="feature-button">
+                    Open Quran <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-        </div>
-    </nav>
+            <div class="feature">
+                <i class="fas fa-book-reader feature-icon"></i>
+                <h3>Hadith Collection</h3>
+                <ul>
+                    <li>Sahih Bukhari</li>
+                    <li>Sahih Muslim</li>
+                    <li>Authenticated sources</li>
+                </ul>
+                <a href="hadiths/" class="feature-button">
+                    Open Hadith <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="feature">
+                <i class="fas fa-search feature-icon"></i>
+                <h3>Easy Search</h3>
+                <ul>
+                    <li>Search by keyword</li>
+                    <li>Browse by chapter</li>
+                    <li>Save favorites</li>
+                </ul>
+            </div>
+        </section>
 
-    <div class="p-8">
-        <h1 class="text-4xl font-bold mb-6 text-center">Surahs</h1>
-        
-        <div id="surah-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- Surah cards will be dynamically inserted here -->
-        </div>
-    </div>
+        <!-- Add new Ways to Contribute section -->
+        <section id="contribute" class="contribute-section">
+            <div class="section-pattern"></div>
+            <div class="contribute-content">
+                <h2>Join Our Mission</h2>
+                <div class="arabesque-divider"></div>
+                
+                <div class="contribute-grid">
+                    <div class="contribute-card">
+                        <i class="fab fa-github"></i>
+                        <h3>Code Contributions</h3>
+                        <p>Help improve the platform by contributing code and features to make Islamic knowledge more accessible.</p>
+                        <a href="https://github.com/Nauman-arshad483/Quran" 
+                           class="contribute-link"
+                           target="_blank"
+                           rel="noopener">
+                            Contribute on GitHub <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-center py-4 mt-8">
-        <p class="text-gray-300">© 2024 Dev-Adalz | Demo Quran Application</p>
+                    <div class="contribute-card">
+                        <i class="fas fa-language"></i>
+                        <h3>Translation Help</h3>
+                        <p>Join our translation team to help make Islamic content available in more languages.</p>
+                        <a href="https://github.com/Nauman-arshad483/Quran/issues/new?labels=translation" 
+                           class="contribute-link"
+                           target="_blank"
+                           rel="noopener">
+                            Join Translation Team <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="contribute-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Support the Project</h3>
+                        <p>Help us maintain and improve this platform through your generous contributions.</p>
+                        <button onclick="showDonationModal()" class="contribute-link donate-btn">
+                            Support Now <i class="fas fa-heart"></i>
+                        </button>
+                        <div class="donation-options">
+                            <a href="https://www.paypal.me/ilmverse" 
+                               class="donation-method"
+                               target="_blank"
+                               rel="noopener">
+                               PayPal <i class="fab fa-paypal"></i>
+                            </a>
+                            <button onclick="showCryptoAddresses()" 
+                                    class="donation-method">
+                                Crypto <i class="fas fa-coins"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contribute-card">
+                        <i class="fas fa-bug"></i>
+                        <h3>Report Issues</h3>
+                        <p>Help us improve by reporting bugs or suggesting new features to enhance the platform.</p>
+                        <a href="https://github.com/Nauman-arshad483/Quran/issues/new" 
+                           class="contribute-link"
+                           target="_blank"
+                           rel="noopener">
+                            Submit Issue <i class="fas fa-exclamation-circle"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="section-pattern"></div>
+            <div class="about-content">
+                <h2>Our Mission</h2>
+                <div class="arabesque-divider"></div>
+                <p class="mission-text">
+                    To make Islamic knowledge accessible to everyone, everywhere. We believe in empowering the Ummah through easy access to authentic Islamic resources.
+                </p>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Free Access</h3>
+                        <p>All our resources are completely free and will always remain free for the sake of Allah.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Open Source</h3>
+                        <p>Our platform is open source, allowing the community to contribute and improve.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Authentic Sources</h3>
+                        <p>All content is verified from authentic Islamic sources and scholars.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quotes-section">
+            <div class="quote-card">
+                <div class="quote-arabic">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
+                <div class="quote-english">"Read in the name of your Lord who created"</div>
+                <div class="quote-reference">Surah Al-Alaq [96:1]</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 IlmVerse. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Populate Surah List
-        const API_BASE_URL = 'https://api.quran.com/api/v4';
-        const surahList = document.getElementById('surah-list');
-
-        fetch(`${API_BASE_URL}/chapters`)
-            .then(response => response.json())
-            .then(data => {
-                data.chapters.forEach(chapter => {
-                    const surahCard = document.createElement('div');
-                    surahCard.className = 'surah-card bg-gray-800 p-4 rounded-lg cursor-pointer transition transform';
-                    surahCard.innerHTML = `
-                        <h2 class="text-xl font-semibold">
-                            <i class="fas fa-book-open mr-2"></i>${chapter.id}. ${chapter.name_simple}
-                        </h2>
-                    `;
-                    
-                    // Add click event to navigate to surah.html with Surah ID
-                    surahCard.addEventListener('click', () => {
-                        window.location.href = `surah.html?id=${chapter.id}`; // Redirect to surah.html with the chapter ID
-                    });
-                    
-                    surahList.appendChild(surahCard); // Append the Surah card to the list
-                });
-            })
-            .catch(error => console.error('Error fetching Surah data:', error));
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
