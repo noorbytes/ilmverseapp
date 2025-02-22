@@ -473,7 +473,7 @@ async function loadAudioDurations() {
     if (audioDurationsCache) return audioDurationsCache;
     
     try {
-        const response = await fetch('/quran/audio-durations.json');
+        const response = await fetch('quran/audio-durations.json');
         audioDurationsCache = await response.json();
         return audioDurationsCache;
     } catch (error) {
@@ -489,7 +489,7 @@ async function initializeAudioPlayer(verses) {
         totalDuration = 0;
         
         // Load durations from JSON file with correct path
-        const response = await fetch('/quran/audio-durations.json');
+        const response = await fetch('quran/audio-durations.json');
         if (!response.ok) {
             throw new Error(`Failed to load audio durations: ${response.status}`);
         }
