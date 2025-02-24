@@ -5,6 +5,8 @@ IlmVerse is a free, open-source Islamic knowledge platform designed to provide M
 
 This project aims to be a **free and open alternative to Muslim Pro/Similar apps(forcing to view ads)**, offering more features while ensuring complete **privacy** and **no ads**.
 
+![d0d4e12d-784e-43bf-ae22-9cd7ee548ebd](https://github.com/user-attachments/assets/adb10d4b-6fa6-4737-9aaf-78f74605a5dc)
+
 ## Features
 ### 1. **Quran Hub**
 - **Full Quran with multiple scripts** (Uthmani, Indo-Pak, and more planned)
