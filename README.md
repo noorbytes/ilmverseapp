@@ -63,7 +63,7 @@ IlmVerse is an **open-source, community-driven project**. You can contribute by:
 - **Developing the mobile apps**
 - **Providing Islamic content (Tafsir, Hadith explanations, etc.)**
 - **Being an active developer and working and seeking for bugs and fix them**
-- **start by going to**: [tobe_fixed.md](https://github.com/Noor-Bytes/ilmverseapp/tobe_fixed.md)
+- **start by going to**: [tobe_fixed.md](https://github.com/Noor-Bytes/ilmverseapp/blob/main/Tobe_fixed.md)
 
 ## Funding & Donations
 To keep IlmVerse **free and ad-free**, we rely on **donations and crowdfunding**. Support us to help expand this project and provide **authentic Islamic knowledge for all**.
