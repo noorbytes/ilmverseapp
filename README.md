@@ -17,6 +17,8 @@ This project aims to be a **free and open alternative to Muslim Pro/Similar apps
 - **Interactive highlighting** (auto-scroll and blue highlight during recitation)
 - **Chapter and verse numbering** (displayed beside each Ayah)
 - **Progress bar for tracking reading**
+![image](https://github.com/user-attachments/assets/abf769a4-1f82-444c-aefd-d560949e7863)
+
 
 ### 2. **Hadith Hub**
 - **Six authentic books of Hadith** (Al-Bukhari, Muslim, Abu Dawud, Ibn Majah, Nasai, Tirmidhi)
