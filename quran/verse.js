@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-=======
-// ============================================================================
-// API CONFIGURATION
-// ============================================================================
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
-const API_BASE = 'https://api.quran.com/api/v4';
+// =====================================================================// API CONFIGURATION
+// =====================================================================const API_BASE = 'https://api.quran.com/api/v4';
 const CLOUD_API = 'https://api.alquran.cloud/v1';
 const AUDIO_BASE_URL = 'https://verses.quran.com/';
 const DEFAULT_QARI = 7; // Mishari Rashid al-`Afasy
@@ -24,13 +19,10 @@ let activeVerseIndex = 0;
 let totalResources = 0;
 let loadedResources = 0;
 
-<<<<<<< HEAD
-// Add this helper function at the top with other variables
-=======
-// ============================================================================
-// API HELPER FUNCTIONS
-// ============================================================================
 
+// Add this helper function at the top with other variables
+// =====================================================================// API HELPER FUNCTIONS
+// =====================================================================
 async function fetchData(url) {
     try {
         const response = await fetch(url);
@@ -44,28 +36,23 @@ async function fetchData(url) {
     }
 }
 
-// ============================================================================
-// HELPER FUNCTIONS
-// ============================================================================
-
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+// =====================================================================// HELPER FUNCTIONS
+// =====================================================================
 function disableSelection() {
     document.body.classList.add('disable-selection');
     setTimeout(() => {
         document.body.classList.remove('disable-selection');
-<<<<<<< HEAD
     }, 800); // Remove class after transition completes
 }
 
 // Add this function near the top of the file
 function showToast(message, type = 'success') {
     // Create toast container if it doesn't exist
-=======
     }, 800);
 }
 
 function showToast(message, type = 'success') {
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
     let container = document.getElementById('toast-container');
     if (!container) {
         container = document.createElement('div');
@@ -74,34 +61,28 @@ function showToast(message, type = 'success') {
         document.body.appendChild(container);
     }
 
-<<<<<<< HEAD
     // Create toast element
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
     const toast = document.createElement('div');
     toast.className = `px-4 py-2 rounded-full text-sm bg-opacity-90 transition-all duration-300 flex items-center gap-2 shadow-lg ${
         type === 'error' ? 'bg-red-500 text-white' : 'bg-emerald-500 text-white'
     }`;
     
-<<<<<<< HEAD
     // Add icon based on type
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
     const icon = type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
     toast.innerHTML = `
         <i class="fas ${icon}"></i>
         <span>${message}</span>
     `;
     
-<<<<<<< HEAD
     // Add to container
     container.appendChild(toast);
     
     // Animate out after delay
-=======
+
     container.appendChild(toast);
     
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transform = 'translate(-50%, -20px)';
@@ -109,10 +90,7 @@ function showToast(message, type = 'success') {
     }, 2000);
 }
 
-<<<<<<< HEAD
 // Add this function before loadSurah
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
 function updateLoadingProgress(detail, progress) {
     const loadingStatus = document.getElementById('loading-status');
     const loadingProgress = document.getElementById('loading-progress');
@@ -123,13 +101,8 @@ function updateLoadingProgress(detail, progress) {
     if (loadingDetail) loadingDetail.textContent = `${Math.round(progress)}% complete`;
 }
 
-<<<<<<< HEAD
-=======
-// ============================================================================
-// MAIN LOAD FUNCTION
-// ============================================================================
-
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+// =====================================================================// MAIN LOAD FUNCTION
+// =====================================================================
 async function loadSurah() {
     const verseContainer = document.getElementById('verses-container');
     if (!verseContainer) return;
@@ -137,7 +110,6 @@ async function loadSurah() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const surahId = urlParams.get('id') || '1';
-<<<<<<< HEAD
         const verseId = urlParams.get('verse'); // Add this line to get verse ID from URL
         
         updateLoadingProgress('Fetching surah data...', 10);
@@ -148,7 +120,7 @@ async function loadSurah() {
             fetch(`${API_BASE}/chapters/${surahId}`),
             fetch(`${CLOUD_API}/surah/${surahId}/en.transliteration`),
             fetch(`${API_BASE}/recitations/${DEFAULT_QARI}/by_chapter/${surahId}?per_page=286`) // Added per_page parameter
-=======
+
         const verseId = urlParams.get('verse');
         
         updateLoadingProgress('Fetching surah data...', 10);
@@ -166,12 +138,10 @@ async function loadSurah() {
             fetchData(`${API_BASE}/quran/translations/20?chapter_number=${surahId}`),
             fetchData(`${API_BASE}/chapters/${surahId}`),
             fetchData(`${CLOUD_API}/surah/${surahId}/en.transliteration`)
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         ]);
 
         updateLoadingProgress('Processing data...', 30);
 
-<<<<<<< HEAD
         const versesData = await versesResponse.json();
         const surahData = await surahInfo.json();
         const transliterationData = await transliteration.json();
@@ -228,7 +198,6 @@ async function loadSurah() {
         }));
 
         // Render content
-=======
         const arabicData = await arabicResponse.json();
         const translationsData = await translationsResponse.json();
         const surahData = await surahInfo.json();
@@ -298,7 +267,6 @@ async function loadSurah() {
         console.log('Final processed verses:', verses.slice(0, 2)); // Log first 2 verses
 
         // Render verses
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         verseContainer.innerHTML = `
             <div class="space-y-6">
                 ${verses.map(verse => `
@@ -314,42 +282,34 @@ async function loadSurah() {
                                     <button 
                                         class="share-btn text-gray-400 hover:text-emerald-400 p-2 rounded-full hover:bg-gray-700"
                                         onclick="shareVerse('${verse.key}')"
-<<<<<<< HEAD
-=======
                                         title="Share verse"
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
                                     >
                                         <i class="fas fa-share-alt"></i>
                                     </button>
                                     <button 
                                         class="tafsir-btn text-gray-400 hover:text-emerald-400 p-2 rounded-full hover:bg-gray-700"
                                         onclick="toggleTafsir('${verse.key}')"
-<<<<<<< HEAD
                                     >
                                         <i class="fas fa-book-open"></i>
                                     </button>
-=======
                                         title="Show tafsir"
                                     >
                                         <i class="fas fa-book-open"></i>
                                     </button>
                                     ${verse.audioUrl ? `
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
                                     <button 
                                         class="play-verse-btn text-emerald-500 hover:text-emerald-400 p-2 rounded-full hover:bg-gray-700"
                                         onclick="toggleVerseAudio('${verse.key}', '${verse.audioUrl}')"
                                         data-audio-url="${verse.audioUrl}"
-<<<<<<< HEAD
                                     >
                                         <i class="fas fa-play"></i>
                                     </button>
-=======
+
                                         title="Play audio"
                                     >
                                         <i class="fas fa-play"></i>
                                     </button>
                                     ` : ''}
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
                                 </div>
                             </div>
                             
@@ -374,27 +334,23 @@ async function loadSurah() {
             </div>
         `;
 
-<<<<<<< HEAD
         // After verses are loaded and rendered, initialize audio player
         await initializeAudioPlayer(verses);
         
-=======
         // Initialize audio player
         await initializeAudioPlayer(verses);
         
         // Tafsir functionality is now implemented directly in verse.js
         
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         updateLoadingProgress('Complete!', 100);
 
         // Remove loading overlay
         setTimeout(() => {
-<<<<<<< HEAD
             document.getElementById('loading-overlay').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('loading-overlay').remove();
             }, 500);
-=======
+
             const loadingOverlay = document.getElementById('loading-overlay');
             if (loadingOverlay) {
                 loadingOverlay.style.opacity = '0';
@@ -402,13 +358,11 @@ async function loadSurah() {
                     loadingOverlay.remove();
                 }, 500);
             }
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         }, 500);
 
         // Add progress update listener
         currentAudio.addEventListener('timeupdate', updateProgress);
 
-<<<<<<< HEAD
         // After rendering verses, scroll to specific verse if verseId exists
         if (verseId) {
             setTimeout(() => {
@@ -422,7 +376,6 @@ async function loadSurah() {
         verseContainer.innerHTML = `
             <div class="bg-red-900/20 text-red-500 p-4 rounded-lg">
                 Failed to load surah: ${error.message}
-=======
         // Scroll to specific verse if requested
         if (verseId) {
             setTimeout(() => {
@@ -438,26 +391,19 @@ async function loadSurah() {
                 <h3 class="font-bold mb-2">Failed to load surah</h3>
                 <p>${error.message}</p>
                 <p class="mt-2 text-sm">Please check your internet connection and try again.</p>
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
             </div>
         `;
     }
 }
 
-<<<<<<< HEAD
 // Add new sidebar functionality
-=======
-// ============================================================================
-// SIDEBAR FUNCTIONS
-// ============================================================================
-
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+// =====================================================================// SIDEBAR FUNCTIONS
+// =====================================================================
 async function initializeSidebar() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const currentSurahId = parseInt(urlParams.get('id')) || 1;
 
-<<<<<<< HEAD
         // Fetch all surahs
         const response = await fetch(`${API_BASE}/chapters`);
         const data = await response.json();
@@ -536,7 +482,6 @@ async function initializeSidebar() {
                 });
             }
         });
-=======
         // Fetch all chapters
         const response = await fetchData(`${API_BASE}/chapters`);
         const data = await response.json();
@@ -618,14 +563,12 @@ async function initializeSidebar() {
                 }
             });
         }
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
 
     } catch (error) {
         console.error('Error initializing sidebar:', error);
     }
 }
 
-<<<<<<< HEAD
 async function updateVerseList(surahId) {
     try {
         const response = await fetch(`${API_BASE}/verses/by_chapter/${surahId}?fields=text_uthmani`);
@@ -658,57 +601,44 @@ function scrollToVerse(verseNumber, highlight = false) {
     const verseElement = document.getElementById(`verse-${verseNumber}`);
     if (verseElement) {
         // Remove previous highlights
-=======
-// ============================================================================
-// VERSE INTERACTION FUNCTIONS
-// ============================================================================
 
+// =====================================================================// VERSE INTERACTION FUNCTIONS
+// =====================================================================
 function scrollToVerse(verseNumber, highlight = false) {
     const verseElement = document.getElementById(`verse-${verseNumber}`);
     if (verseElement) {
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         document.querySelectorAll('.verse-block').forEach(block => {
             block.classList.remove('active', 'bg-emerald-900/20');
         });
         
-<<<<<<< HEAD
         // Add highlight to clicked verse
         verseElement.classList.add('active');
         if (highlight) {
             verseElement.classList.add('bg-emerald-900/20');
             // Remove highlight after 3 seconds
-=======
         verseElement.classList.add('active');
         if (highlight) {
             verseElement.classList.add('bg-emerald-900/20');
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
             setTimeout(() => {
                 verseElement.classList.remove('bg-emerald-900/20');
             }, 3000);
         }
         
-<<<<<<< HEAD
         // Smooth scroll to verse
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
         verseElement.scrollIntoView({ 
             behavior: 'smooth', 
             block: 'center'
         });
 
-<<<<<<< HEAD
         // Update URL without reloading the page
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
         const urlParams = new URLSearchParams(window.location.search);
         urlParams.set('verse', verseNumber);
         const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
         window.history.pushState({}, '', newUrl);
 
-<<<<<<< HEAD
         // Update verse list highlight
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         document.querySelectorAll('#verse-list .list-item').forEach(item => {
             item.classList.remove('active');
             if (item.getAttribute('data-verse') === verseNumber.toString()) {
@@ -723,17 +653,14 @@ function toggleVerseAudio(verseKey, audioUrl) {
 
     const fullAudioUrl = `${AUDIO_BASE_URL}${audioUrl}`;
     const verseElement = document.getElementById(`verse-${verseKey.split(':')[1]}`);
-<<<<<<< HEAD
     const playButton = verseElement.querySelector('.play-verse-btn i');
 
     // If clicking the same verse that's playing
-=======
     if (!verseElement) return;
     
     const playButton = verseElement.querySelector('.play-verse-btn i');
     if (!playButton) return;
 
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     if (currentPlayingVerse === verseKey) {
         if (isPlaying) {
             currentAudio.pause();
@@ -747,7 +674,6 @@ function toggleVerseAudio(verseKey, audioUrl) {
         return;
     }
 
-<<<<<<< HEAD
     // Reset previous verse's button if exists
     if (currentPlayingVerse) {
         const prevVerseElement = document.getElementById(`verse-${currentPlayingVerse.split(':')[1]}`);
@@ -757,7 +683,6 @@ function toggleVerseAudio(verseKey, audioUrl) {
     }
 
     // Play new verse
-=======
     if (currentPlayingVerse) {
         const prevVerseElement = document.getElementById(`verse-${currentPlayingVerse.split(':')[1]}`);
         if (prevVerseElement) {
@@ -766,18 +691,14 @@ function toggleVerseAudio(verseKey, audioUrl) {
         }
     }
 
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     currentAudio.pause();
     currentAudio.src = fullAudioUrl;
     currentAudio.play().then(() => {
         playButton.className = 'fas fa-pause';
         isPlaying = true;
         currentPlayingVerse = verseKey;
-<<<<<<< HEAD
         
         // Highlight current verse
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         highlightVerse(verseKey.split(':')[1]);
     }).catch(error => {
         console.error('Error playing audio:', error);
@@ -785,7 +706,6 @@ function toggleVerseAudio(verseKey, audioUrl) {
     });
 }
 
-<<<<<<< HEAD
 currentAudio.addEventListener('ended', () => {
     if (currentPlayingVerse) {
         const verseElement = document.getElementById(`verse-${currentPlayingVerse.split(':')[1]}`);
@@ -799,17 +719,15 @@ currentAudio.addEventListener('ended', () => {
 
 function highlightVerse(verseNumber) {
     // Remove previous highlights
-=======
+
 function highlightVerse(verseNumber) {
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
     document.querySelectorAll('.verse-block').forEach(block => {
         block.classList.remove('active');
     });
     
-<<<<<<< HEAD
     // Add highlight to current verse
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
     const verseElement = document.getElementById(`verse-${verseNumber}`);
     if (verseElement) {
         verseElement.classList.add('active');
@@ -817,7 +735,6 @@ function highlightVerse(verseNumber) {
     }
 }
 
-<<<<<<< HEAD
 // Add new audio control functions
 let audioDurationsCache = null;
 
@@ -844,7 +761,7 @@ async function initializeAudioPlayer(verses) {
         const response = await fetch('audio.json');
         if (!response.ok) {
             throw new Error(`Failed to load audio durations: ${response.status}`);
-=======
+
 async function toggleTafsir(verseKey) {
     console.log('toggleTafsir called with verseKey:', verseKey);
     
@@ -1007,10 +924,8 @@ async function shareVerse(verseKey) {
     }
 }
 
-// ============================================================================
-// AUDIO PLAYER FUNCTIONS
-// ============================================================================
-
+// =====================================================================// AUDIO PLAYER FUNCTIONS
+// =====================================================================
 async function initializeAudioPlayer(verses) {
     try {
         verseDurations = [];
@@ -1020,31 +935,26 @@ async function initializeAudioPlayer(verses) {
         if (!response.ok) {
             console.warn('Audio durations file not found');
             return;
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         }
         const audioDurations = await response.json();
         
         const surahId = verses[0]?.key.split(':')[0];
         
         if (!audioDurations[surahId]) {
-<<<<<<< HEAD
             console.error('No cached durations found for surah:', surahId);
             return;
         }
 
         // Use cached durations instead of calculating
-=======
             console.warn('No cached durations for surah:', surahId);
             return;
         }
 
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         verses.forEach(verse => {
             if (verse.audioUrl) {
                 const duration = audioDurations[surahId].verses[verse.key] || 0;
                 verseDurations.push(duration);
                 totalDuration += duration;
-<<<<<<< HEAD
                 console.log(`Using cached duration for verse ${verse.key}: ${duration}s`);
             }
         });
@@ -1053,7 +963,6 @@ async function initializeAudioPlayer(verses) {
         document.getElementById('total-time').textContent = formatTime(totalDuration);
         
         // Add event listeners
-=======
             }
         });
 
@@ -1062,7 +971,6 @@ async function initializeAudioPlayer(verses) {
             totalTimeElement.textContent = formatTime(totalDuration);
         }
         
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         const progressContainer = document.getElementById('progress-container');
         if (progressContainer) {
             progressContainer.addEventListener('click', handleProgressClick);
@@ -1094,22 +1002,16 @@ function formatTime(seconds) {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
 
-<<<<<<< HEAD
 // Add this function before playFromVerse
 function updatePlayingVerse(verseNumber) {
     // Update verse number display
-=======
 function updatePlayingVerse(verseNumber) {
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     const playingVerseElement = document.getElementById('playing-verse');
     if (playingVerseElement) {
         playingVerseElement.textContent = `Verse: ${verseNumber}`;
     }
 
-<<<<<<< HEAD
     // Update verse list highlight
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     document.querySelectorAll('#verse-list .list-item').forEach(item => {
         item.classList.remove('active');
         if (item.getAttribute('data-verse') === verseNumber.toString()) {
@@ -1117,28 +1019,22 @@ function updatePlayingVerse(verseNumber) {
         }
     });
 
-<<<<<<< HEAD
     // Scroll the verse list to show the active verse
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     const activeItem = document.querySelector('#verse-list .list-item.active');
     if (activeItem) {
         activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }
 
-<<<<<<< HEAD
 // Update the playFromVerse function to include auto-scrolling and highlighting
 async function playFromVerse(index) {
     if (!isPlayingAll) return;
     
     disableSelection(); // Add this line to prevent selection during transition
-=======
 async function playFromVerse(index) {
     if (!isPlayingAll) return;
     
     disableSelection();
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     
     activeVerseIndex = index;
     const verses = document.querySelectorAll('.verse-block');
@@ -1148,10 +1044,7 @@ async function playFromVerse(index) {
         return;
     }
 
-<<<<<<< HEAD
     // Remove all previous highlights and pause buttons
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     verses.forEach(verse => {
         verse.classList.remove('active');
         verse.style.backgroundColor = '';
@@ -1159,66 +1052,52 @@ async function playFromVerse(index) {
         if (playBtn) playBtn.className = 'fas fa-play';
     });
 
-<<<<<<< HEAD
     // Add highlight to current verse and scroll into view
     const currentVerse = verses[index];
     if (currentVerse) {
         currentVerse.classList.add('active');
         currentVerse.style.backgroundColor = 'rgba(16, 185, 129, 0.15)'; // Slightly more visible highlight
-=======
     const currentVerse = verses[index];
     if (currentVerse) {
         currentVerse.classList.add('active');
         currentVerse.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         currentVerse.scrollIntoView({
             behavior: 'smooth',
             block: 'center'
         });
         
-<<<<<<< HEAD
         // Update verse play button
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         const playBtn = currentVerse.querySelector('.play-verse-btn i');
         if (playBtn) playBtn.className = 'fas fa-pause';
     }
 
-<<<<<<< HEAD
     // Update UI
     updatePlayingVerse(index + 1);
     
     // Play audio
     const audioBtn = currentVerse.querySelector('.play-verse-btn');
     const audioUrl = audioBtn.dataset.audioUrl;
-=======
+
     updatePlayingVerse(index + 1);
     
     const audioBtn = currentVerse.querySelector('.play-verse-btn');
     const audioUrl = audioBtn?.dataset.audioUrl;
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     
     if (audioUrl) {
         currentAudio.src = `${AUDIO_BASE_URL}${audioUrl}`;
         try {
             await currentAudio.play();
             
-<<<<<<< HEAD
             // Set up next verse
             currentAudio.onended = () => {
                 // Reset current verse button and remove highlight
-=======
             currentAudio.onended = () => {
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
                 const playBtn = currentVerse.querySelector('.play-verse-btn i');
                 if (playBtn) playBtn.className = 'fas fa-play';
                 currentVerse.classList.remove('active');
                 currentVerse.style.backgroundColor = '';
                 
-<<<<<<< HEAD
                 // Play next verse
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
                 playFromVerse(index + 1);
             };
         } catch (error) {
@@ -1230,7 +1109,6 @@ async function playFromVerse(index) {
     }
 }
 
-<<<<<<< HEAD
 // Update togglePlayAll function to add highlighting for first verse
 async function togglePlayAll() {
     const playButton = document.getElementById('play-all');
@@ -1261,7 +1139,6 @@ async function togglePlayAll() {
 }
 
 // Update stopPlayback to properly remove all highlights
-=======
 async function togglePlayAll() {
     const playButton = document.getElementById('play-all');
     if (!playButton) return;
@@ -1293,12 +1170,10 @@ async function togglePlayAll() {
     }
 }
 
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
 function stopPlayback() {
     isPlayingAll = false;
     currentAudio.pause();
     currentAudio.currentTime = 0;
-<<<<<<< HEAD
     document.querySelector('#play-all i').className = 'fas fa-play';
     activeVerseIndex = 0;
     updatePlayingVerse(1);
@@ -1307,7 +1182,7 @@ function stopPlayback() {
     document.querySelectorAll('.verse-block').forEach(verse => {
         verse.classList.remove('active');
         verse.style.backgroundColor = '';
-=======
+
     
     const playAllBtn = document.querySelector('#play-all i');
     if (playAllBtn) {
@@ -1322,7 +1197,6 @@ function stopPlayback() {
         verse.style.backgroundColor = '';
         const playBtn = verse.querySelector('.play-verse-btn i');
         if (playBtn) playBtn.className = 'fas fa-play';
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     });
 }
 
@@ -1354,7 +1228,6 @@ function playNextVerse() {
     }
 }
 
-<<<<<<< HEAD
 function stopPlayback() {
     isPlayingAll = false;
     currentAudio.pause();
@@ -1373,11 +1246,10 @@ function updateProgress() {
     if (!isPlayingAll) return;
     
     // Calculate current time including completed verses
-=======
+
 function updateProgress() {
     if (!isPlayingAll) return;
     
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     const completedVersesDuration = verseDurations
         .slice(0, activeVerseIndex)
         .reduce((sum, duration) => sum + duration, 0);
@@ -1385,7 +1257,7 @@ function updateProgress() {
     currentTime = completedVersesDuration + currentAudio.currentTime;
     const progress = (currentTime / totalDuration) * 100;
     
-<<<<<<< HEAD
+
     // Update UI
     document.getElementById('progress-bar').style.width = `${progress}%`;
     document.getElementById('current-time').textContent = formatTime(currentTime);
@@ -1397,7 +1269,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSidebar();
     
     // Add event listener for loading overlay
-=======
     const progressBar = document.getElementById('progress-bar');
     const currentTimeElement = document.getElementById('current-time');
     
@@ -1409,10 +1280,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
 
-// ============================================================================
-// EVENT LISTENERS
-// ============================================================================
-
+// =====================================================================// EVENT LISTENERS
+// =====================================================================
 currentAudio.addEventListener('ended', () => {
     if (!isPlayingAll) {
         if (currentPlayingVerse) {
@@ -1428,10 +1297,8 @@ currentAudio.addEventListener('ended', () => {
     }
 });
 
-// ============================================================================
-// INITIALIZATION
-// ============================================================================
-
+// =====================================================================// INITIALIZATION
+// =====================================================================
 document.addEventListener('DOMContentLoaded', () => {
     // The code will automatically try old API first (no auth needed)
     // Only if old API fails, it will check for credentials
@@ -1439,7 +1306,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSurah();
     initializeSidebar();
     
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
     const loadingOverlay = document.getElementById('loading-overlay');
     if (loadingOverlay) {
         loadingOverlay.addEventListener('transitionend', () => {
@@ -1449,16 +1316,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-<<<<<<< HEAD
+
     // Add missing event listeners for audio controls
-=======
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
     const progressContainer = document.getElementById('progress-container');
     if (progressContainer) {
         progressContainer.addEventListener('click', handleProgressClick);
     }
 
-<<<<<<< HEAD
+
     // Initialize audio controls
     currentAudio.addEventListener('timeupdate', updateProgress);
     currentAudio.addEventListener('ended', () => {
@@ -1599,7 +1465,6 @@ async function shareVerse(verseKey) {
         showToast('Failed to copy link', 'error');
     }
 }
-=======
     currentAudio.addEventListener('timeupdate', updateProgress);
 });
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
