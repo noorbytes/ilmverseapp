@@ -41,12 +41,10 @@ const TAFSIR_IDS = {
 let currentTafsirId = TAFSIR_IDS['en-tazkirul-quran'].id;  // Use the ID from the object
 let tafsirCache = new Map();
 
-<<<<<<< HEAD
+
 async function loadTafsir(surahId, verseKey) {
-=======
 // Make function globally accessible
 window.loadTafsir = async function(surahId, verseKey) {
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     const [surah, verse] = verseKey.split(':');
     const cacheKey = `${currentTafsirId}-${verseKey}`;
     
@@ -88,16 +86,14 @@ window.loadTafsir = async function(surahId, verseKey) {
     }
 }
 
-<<<<<<< HEAD
 function toggleTafsir(verseKey) {
     const verseElement = document.querySelector(`[data-verse-key="${verseKey}"]`);
-=======
+
 // Make function globally accessible
 window.toggleTafsir = function(verseKey) {
     console.log('window.toggleTafsir called with:', verseKey);
     const verseElement = document.querySelector(`[data-verse-key="${verseKey}"]`);
     console.log('Found verse element:', verseElement);
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     if (!verseElement) {
         console.error('Verse element not found:', verseKey);
         return;
@@ -161,9 +157,8 @@ window.toggleTafsir = function(verseKey) {
     }
 }
 
-<<<<<<< HEAD
+
 async function changeTafsir(tafsirName, verseKey) {
-=======
 // Make function globally accessible
 window.changeTafsir = async function(tafsirName, verseKey) {
 >>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
