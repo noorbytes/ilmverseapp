@@ -525,21 +525,33 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+<<<<<<< HEAD
     // Add live search functionality
+=======
+    // Enhanced live search functionality with dynamic suggestions
+>>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
     const mainSearch = document.getElementById('main-search');
     const searchResults = document.getElementById('search-results');
 
     let searchTimeout;
     mainSearch.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
+<<<<<<< HEAD
         const query = e.target.value;
         
         searchTimeout = setTimeout(() => {
             if (query.length >= 3) {
+=======
+        const query = e.target.value.trim();
+        
+        searchTimeout = setTimeout(() => {
+            if (query.length >= 2) {
+>>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
                 searchHadiths(query);
             } else {
                 searchResults.classList.remove('show');
             }
+<<<<<<< HEAD
         }, 300);
     });
 
@@ -557,6 +569,77 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="text-sm">${hadith.english.substring(0, 150)}...</div>
                 </div>
             `).join('');
+=======
+        }, 200); // Reduced delay for faster response
+    });
+
+    // Enhanced search function with better ranking and top 5 suggestions
+    async function searchHadiths(query) {
+        if (!query || query.length < 2) {
+            searchResults.classList.remove('show');
+            return;
+        }
+
+        const searchQuery = query.toLowerCase();
+        const results = currentHadiths.map(hadith => {
+            let score = 0;
+            const english = hadith.english.toLowerCase();
+            const arabic = hadith.arabic;
+            const narrator = hadith.narrator.toLowerCase();
+            const hadithNumber = hadith.number.toString();
+
+            // Exact matches get highest score
+            if (english.includes(searchQuery)) {
+                score += 10;
+                // Bonus for starting with query
+                if (english.startsWith(searchQuery)) score += 5;
+            }
+            if (arabic.includes(query)) {
+                score += 8;
+            }
+            if (narrator.includes(searchQuery)) {
+                score += 6;
+            }
+            if (hadithNumber.includes(query)) {
+                score += 4;
+            }
+
+            // Word boundary matches get bonus
+            const words = searchQuery.split(' ');
+            words.forEach(word => {
+                if (word.length > 2) {
+                    const regex = new RegExp(`\\b${word}`, 'i');
+                    if (regex.test(english)) score += 3;
+                    if (regex.test(narrator)) score += 2;
+                }
+            });
+
+            return { hadith, score };
+        })
+        .filter(result => result.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 5) // Top 5 results only
+        .map(result => result.hadith);
+
+        if (results.length > 0) {
+            searchResults.innerHTML = `
+                <div class="search-header">
+                    <span class="text-sm text-gray-400">Top ${results.length} matches for "${query}"</span>
+                </div>
+                ${results.map(hadith => `
+                    <div class="search-result-item" data-hadith="${hadith.number}">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="text-emerald-500 font-semibold">#${hadith.number}</div>
+                                <div class="text-sm text-gray-300 mt-1">${hadith.english.substring(0, 120)}${hadith.english.length > 120 ? '...' : ''}</div>
+                                <div class="text-xs text-gray-500 mt-1">${hadith.narrator}</div>
+                            </div>
+                            <div class="text-xs text-gray-400 ml-2">${hadith.grade || 'Sahih'}</div>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+>>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
             
             searchResults.classList.add('show');
 
@@ -570,7 +653,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             });
         } else {
+<<<<<<< HEAD
             searchResults.classList.remove('show');
+=======
+            searchResults.innerHTML = `
+                <div class="search-no-results">
+                    <div class="text-gray-400 text-center py-4">
+                        <i class="fas fa-search mb-2"></i>
+                        <div>No hadith found matching "${query}"</div>
+                        <div class="text-xs mt-1">Try different keywords or check spelling</div>
+                    </div>
+                </div>
+            `;
+            searchResults.classList.add('show');
+>>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
         }
     }
 

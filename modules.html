@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Modules - IlmVerse</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .dark {
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark .glass-effect {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .module-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .module-card:hover::before {
+            left: 100%;
+        }
+        
+        .badge-live {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function App() {
+            const [darkMode, setDarkMode] = useState(true);
+
+            useEffect(() => {
+                if (darkMode) {
+                    document.body.classList.add('dark');
+                } else {
+                    document.body.classList.remove('dark');
+                }
+            }, [darkMode]);
+
+            const modules = [
+                {
+                    id: 'quran',
+                    title: 'Quran Module',
+                    description: 'Read and study the complete Quran with multiple translations, audio recitations, and bookmarking features. Perfect for daily reading and memorization.',
+                    icon: 'fa-book-quran',
+                    features: [
+                        'Multiple translations (English(still working on other translations))',
+                        'Audio recitations by famous Qari',
+                        'Bookmark your favorite verses(yet to be done)',
+                        'Search by Surah',
+                        'Night mode for comfortable reading',
+                        'Verse-by-verse playback'
+                    ],
+                    url: '/quran/index.html', // Replace with actual Quran module URL
+                    gradient: 'from-green-500 to-emerald-600',
+                    stats: { users: "950", rating: "4.7" }
+
+
+                },
+                {
+                    id: 'hadith',
+                    title: 'Hadith Module',
+                    description: 'Access authentic hadith collections including Sahih Bukhari, Sahih Muslim, and more. Search, filter, and study the teachings of Prophet Muhammad (PBUH).',
+                    icon: 'fa-scroll',
+                    features: [
+                        'Sahih Bukhari & Muslim collections',
+                        'Advanced search and filtering',
+                        'Hadith authenticity grades',
+                        'Share hadiths easily',
+                        'search by keywords, hadith numbers and book names'
+                    ],
+                    url: '/hadiths/index.html', // Replace with actual Hadith module URL
+                    gradient: 'from-blue-500 to-indigo-600',
+                    stats: { users: "950", rating: "4.7" }
+
+                }
+            ];
+
+            return (
+                <div className={darkMode ? 'dark' : ''}>
+                    {/* Header */}
+                    <header className="glass-effect shadow-lg">
+                        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                            <a href="landing.html" className="flex items-center space-x-2">
+                                <i className="fas fa-book-quran text-3xl gradient-text"></i>
+                                <span className="text-2xl font-bold gradient-text">IlmVerse</span>
+                            </a>
+                            
+                            
+                            
+                            <div className="flex items-center space-x-4">
+                                <a href="index.html" className="hidden md:inline-block hover:text-purple-400 transition-colors">
+                                    <i className="fas fa-arrow-left mr-2"></i>Back to Home
+                                </a>
+                                <button 
+                                    onClick={() => setDarkMode(!darkMode)}
+                                    className="p-2 rounded-lg glass-effect hover:bg-purple-500/20 transition-colors"
+                                >
+                                    <i className={`fas ${darkMode ? 'fa-sun' : 'fa-moon'}`}></i>
+                                </button>
+                            </div>
+                        </nav>
+                    </header>
+
+                    {/* Hero Section */}
+                    <section className="pt-32 pb-20 px-6">
+                        <div className="max-w-6xl mx-auto text-center">
+                            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 glass-effect rounded-full">
+                                <span className="relative flex h-3 w-3">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                                </span>
+                                <span className="text-sm font-semibold text-green-400">Live & Ready to Use</span>
+                            </div>
+                            
+                            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                                Experience IlmVerse <span className="gradient-text">Today</span>
+                            </h1>
+                            
+                            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-8">
+                                Our Quran and Hadith modules are fully functional and ready for your daily Islamic practice. 
+                                Start using them right now, completely free.
+                            </p>
+
+                            <div className="flex flex-wrap justify-center gap-6 text-sm">
+                                <div className="flex items-center text-gray-400">
+                                    <i className="fas fa-check-circle text-green-400 mr-2"></i>
+                                    <span>No Sign-up Required</span>
+                                </div>
+                                <div className="flex items-center text-gray-400">
+                                    <i className="fas fa-check-circle text-green-400 mr-2"></i>
+                                    <span>100% Free Forever</span>
+                                </div>
+                                <div className="flex items-center text-gray-400">
+                                    <i className="fas fa-check-circle text-green-400 mr-2"></i>
+                                    <span>Works on All Devices</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Modules Grid */}
+                    <section className="py-20 px-6">
+                        <div className="max-w-6xl mx-auto">
+                            <div className="grid md:grid-cols-2 gap-8">
+                                {modules.map((module) => (
+                                    <div key={module.id} className="glass-effect rounded-2xl p-8 module-card hover-lift">
+                                        {/* Module Header */}
+                                        <div className="flex items-start justify-between mb-6">
+                                            <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${module.gradient} flex items-center justify-center`}>
+                                                <i className={`fas ${module.icon} text-3xl text-white`}></i>
+                                            </div>
+                                            <span className="badge-live px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-semibold">
+                                                ● LIVE
+                                            </span>
+                                        </div>
+
+                                        {/* Module Title & Description */}
+                                        <h2 className="text-3xl font-bold mb-3">{module.title}</h2>
+                                        <p className="text-gray-400 mb-6">{module.description}</p>
+
+                                        {/* Stats */}
+                                        <div className="flex gap-6 mb-6 pb-6 border-b border-gray-700">
+                                            <div>
+                                                
+
+                                            </div>
+                                            <div>
+                                                
+                                                <div className="text-sm text-gray-400">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Features List */}
+                                        <div className="mb-8">
+                                            <h3 className="font-semibold mb-4 text-lg">Key Features:</h3>
+                                            <ul className="space-y-3">
+                                                {module.features.map((feature, idx) => (
+                                                    <li key={idx} className="flex items-start text-gray-400">
+                                                        <i className="fas fa-check text-green-400 mr-3 mt-1"></i>
+                                                        <span>{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        {/* CTA Button */}
+                                        <a 
+                                            href={module.url} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="btn-primary w-full py-4 rounded-lg font-semibold text-white text-lg inline-flex items-center justify-center"
+                                        >
+                                            <i className="fas fa-external-link-alt mr-2"></i>
+                                            Open Module
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* How to Use Section */}
+                    <section className="py-20 px-6 bg-gradient-to-b from-transparent to-purple-900/10">
+                        <div className="max-w-4xl mx-auto">
+                            <h2 className="text-4xl font-bold text-center mb-12">
+                                How to <span className="gradient-text">Get Started</span>
+                            </h2>
+                            
+                            <div className="grid md:grid-cols-3 gap-8">
+                                {[
+                                    { step: '1', title: 'Choose Module', desc: 'Select Quran or Hadith module above', icon: 'fa-mouse-pointer' },
+                                    { step: '2', title: 'Click Open', desc: 'Click "Open Module" button to launch', icon: 'fa-hand-pointer' },
+                                    { step: '3', title: 'Start Using', desc: 'Begin your Islamic learning journey', icon: 'fa-rocket' }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="text-center">
+                                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                                            {item.step}
+                                        </div>
+                                        <i className={`fas ${item.icon} text-3xl gradient-text mb-3`}></i>
+                                        <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                                        <p className="text-gray-400">{item.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Coming Soon Section */}
+                    <section className="py-20 px-6">
+                        <div className="max-w-6xl mx-auto">
+                            <div className="text-center mb-12">
+                                <h2 className="text-4xl font-bold mb-4">
+                                    More Modules <span className="gradient-text">Coming Soon</span>
+                                </h2>
+                                <p className="text-xl text-gray-400">Help us build the future of Islamic apps</p>
+                            </div>
+                            
+                            <div className="grid md:grid-cols-3 gap-6">
+                                {[
+                                    { icon: 'fa-clock', title: 'Prayer Times', desc: 'Accurate prayer times for your location' },
+                                    { icon: 'fa-compass', title: 'Qibla Finder', desc: 'Find Qibla direction anywhere' },
+                                    { icon: 'fa-calendar', title: 'Islamic Calendar', desc: 'Hijri dates and events' }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="glass-effect rounded-xl p-6 text-center opacity-60">
+                                        <i className={`fas ${item.icon} text-4xl gradient-text mb-4`}></i>
+                                        <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                                        <p className="text-sm text-gray-400 mb-4">{item.desc}</p>
+                                        <span className="text-xs px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full">
+                                            In Development
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* CTA Section */}
+                    <section className="py-20 px-6 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
+                        <div className="max-w-4xl mx-auto text-center">
+                            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                                Want to <span className="gradient-text">Contribute</span>?
+                            </h2>
+                            <p className="text-xl text-gray-400 mb-8">
+                                Help us build more modules and improve existing ones. Join our open-source community today.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <a href="https://github.com/noorbytes/ilmverseapp" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-4 rounded-lg font-semibold text-white text-lg inline-flex items-center justify-center">
+                                    <i className="fab fa-github mr-2"></i>
+                                    View on GitHub
+                                </a>
+                                <a href="index.html" className="glass-effect px-8 py-4 rounded-lg font-semibold text-lg inline-flex items-center justify-center hover:bg-purple-500/20 transition-colors">
+                                    <i className="fas fa-arrow-left mr-2"></i>
+                                    Back to Home
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="py-12 px-6 border-t border-gray-800">
+                        <div className="max-w-6xl mx-auto text-center">
+                            <div className="flex items-center justify-center space-x-2 mb-4">
+                                <i className="fas fa-book-quran text-2xl gradient-text"></i>
+                                <span className="text-xl font-bold gradient-text">IlmVerse</span>
+                            </div>
+                            <p className="text-gray-400 text-sm mb-6">
+                                Free, open-source Islamic knowledge platform built by the community.
+                            </p>
+                            <div className="flex justify-center space-x-6 mb-6">
+                                <a href="https://github.com/noorbytes/ilmverseapp" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-purple-400 transition-colors">
+                                    <i className="fab fa-github"></i>
+                                </a>
+                                <a href="#" className="text-2xl hover:text-purple-400 transition-colors">
+                                    <i className="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" className="text-2xl hover:text-purple-400 transition-colors">
+                                    <i className="fab fa-discord"></i>
+                                </a>
+                            </div>
+                            <p className="text-gray-400 text-sm">
+                                © 2025 IlmVerse. Open source and free forever. Made with ❤️ for the Ummah by noorbytes.
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+
+    </script>
+</body>
+</html>
+

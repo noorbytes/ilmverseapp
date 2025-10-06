@@ -447,23 +447,78 @@ body {
     background: var(--bg-dark);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0.5rem;
+<<<<<<< HEAD
     max-height: 300px;
     overflow-y: auto;
     display: none;
+=======
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    backdrop-filter: blur(10px);
+>>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
 }
 
 .search-results.show {
     display: block;
+<<<<<<< HEAD
+=======
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(16, 185, 129, 0.1);
+>>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
 }
 
 .search-result-item {
     padding: 1rem;
+<<<<<<< HEAD
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
 }
 
 .search-result-item:hover {
     background: rgba(255, 255, 255, 0.05);
+=======
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.search-result-item:hover {
+    background: rgba(16, 185, 129, 0.1);
+    transform: translateX(4px);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-no-results {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.search-no-results i {
+    font-size: 2rem;
+    opacity: 0.5;
+>>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
 }
 
 /* Add sticky header styles */
