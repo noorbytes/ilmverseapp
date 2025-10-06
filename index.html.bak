@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IlmVerse</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">IlmVerse</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#Guthub">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="arabic-title">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+            <h1>Explore the Divine Words</h1>
+            <button class="cta-button">Begin Journey</button>
+        </section>
+
+        <section id="features">
+            <div class="feature">
+                <i class="fas fa-quran feature-icon"></i>
+                <h3>Al-Quran</h3>
+                <ul>
+                    <li>Complete Quran text</li>
+                    <li>English translation</li>
+                    <li>Audio recitations</li>
+                </ul>
+                <a href="quran/" class="feature-button">
+                    Open Quran <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="feature">
+                <i class="fas fa-book-reader feature-icon"></i>
+                <h3>Hadith Collection</h3>
+                <ul>
+                    <li>Sahih Bukhari</li>
+                    <li>Sahih Muslim</li>
+                    <li>Authenticated sources</li>
+                </ul>
+                <a href="hadiths/" class="feature-button">
+                    Open Hadith <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="feature">
+                <i class="fas fa-search feature-icon"></i>
+                <h3>Easy Search</h3>
+                <ul>
+                    <li>Search by keyword</li>
+                    <li>Browse by chapter</li>
+                    <li>Save favorites</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Add new Ways to Contribute section -->
+        <section id="contribute" class="contribute-section">
+            <div class="section-pattern"></div>
+            <div class="contribute-content">
+                <h2>Join Our Mission</h2>
+                <div class="arabesque-divider"></div>
+                
+                <div class="contribute-grid">
+                    <div class="contribute-card">
+                        <i class="fab fa-github"></i>
+                        <h3>Code Contributions</h3>
+                        <p>Help improve the platform by contributing code and features to make Islamic knowledge more accessible.</p>
+                        <a href="https://github.com/Nauman-arshad483/Quran" 
+                           class="contribute-link"
+                           target="_blank"
+                           rel="noopener">
+                            Contribute on GitHub <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="contribute-card">
+                        <i class="fas fa-language"></i>
+                        <h3>Translation Help</h3>
+                        <p>Join our translation team to help make Islamic content available in more languages.</p>
+                        <a href="https://github.com/Nauman-arshad483/Quran/issues/new?labels=translation" 
+                           class="contribute-link"
+                           target="_blank"
+                           rel="noopener">
+                            Join Translation Team <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="contribute-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Support the Project</h3>
+                        <p>Help us maintain and improve this platform through your generous contributions.</p>
+                        <button onclick="showDonationModal()" class="contribute-link donate-btn">
+                            Support Now <i class="fas fa-heart"></i>
+                        </button>
+                        <div class="donation-options">
+                            <a href="https://www.paypal.me/ilmverse" 
+                               class="donation-method"
+                               target="_blank"
+                               rel="noopener">
+                               PayPal <i class="fab fa-paypal"></i>
+                            </a>
+                            <button onclick="showCryptoAddresses()" 
+                                    class="donation-method">
+                                Crypto <i class="fas fa-coins"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contribute-card">
+                        <i class="fas fa-bug"></i>
+                        <h3>Report Issues</h3>
+                        <p>Help us improve by reporting bugs or suggesting new features to enhance the platform.</p>
+                        <a href="https://github.com/Nauman-arshad483/Quran/issues/new" 
+                           class="contribute-link"
+                           target="_blank"
+                           rel="noopener">
+                            Submit Issue <i class="fas fa-exclamation-circle"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="section-pattern"></div>
+            <div class="about-content">
+                <h2>Our Mission</h2>
+                <div class="arabesque-divider"></div>
+                <p class="mission-text">
+                    To make Islamic knowledge accessible to everyone, everywhere. We believe in empowering the Ummah through easy access to authentic Islamic resources.
+                </p>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Free Access</h3>
+                        <p>All our resources are completely free and will always remain free for the sake of Allah.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Open Source</h3>
+                        <p>Our platform is open source, allowing the community to contribute and improve.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Authentic Sources</h3>
+                        <p>All content is verified from authentic Islamic sources and scholars.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quotes-section">
+            <div class="quote-card">
+                <div class="quote-arabic">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
+                <div class="quote-english">"Read in the name of your Lord who created"</div>
+                <div class="quote-reference">Surah Al-Alaq [96:1]</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 IlmVerse. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+=======
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IlmVerse - Open Source Islamic Knowledge Platform</title>
+    
+     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+     
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+     
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .arabic-font {
+            font-family: 'Amiri', serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            border-radius: 10px;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .gradient-animate {
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+        }
+
+        /* Smooth Transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Hero Background Pattern */
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+        }
+
+        .dark .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+        }
+
+        /* Card Hover Effects */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+        }
+
+        /* Button Ripple Effect */
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-ripple::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-ripple:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Stats Counter Animation */
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-item {
+            animation: countUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-gray-100">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Navigation Component
+        const Navigation = ({ darkMode, toggleDarkMode }) => {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+                    scrolled 
+                        ? 'glass shadow-lg py-4' 
+                        : 'bg-transparent py-6'
+                }`}>
+                    <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-500 flex items-center justify-center">
+                                <i className="fas fa-book-quran text-white text-xl"></i>
+                            </div>
+                            <span className="text-2xl font-bold gradient-text">IlmVerse</span>
+                        </div>
+
+                        <div className="hidden md:flex items-center gap-8">
+                            <a href="#features" className="hover:text-emerald-500 transition-colors font-medium">Features</a>
+                            <a href="#roadmap" className="hover:text-emerald-500 transition-colors font-medium">Roadmap</a>
+                            <a href="#contribute" className="hover:text-emerald-500 transition-colors font-medium">Contribute</a>
+                            <a href="#community" className="hover:text-emerald-500 transition-colors font-medium">Community</a>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                            <button 
+                                onClick={toggleDarkMode}
+                                className="w-10 h-10 rounded-lg glass flex items-center justify-center hover:scale-110 transition-transform"
+                            >
+                                <i className={`fas ${darkMode ? 'fa-sun' : 'fa-moon'} text-lg`}></i>
+                            </button>
+                            <a 
+                                href="https://github.com/noorbytes/ilmverseapp" 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hidden md:flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-blue-500 text-white rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all btn-ripple"
+                            >
+                                <i className="fab fa-github"></i>
+                                Star on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        // Hero Section
+        const Hero = () => {
+            return (
+                <section className="min-h-screen flex items-center justify-center relative overflow-hidden hero-pattern pt-20">
+                    {/* Floating Elements */}
+                    <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-float"></div>
+                    <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+
+                    <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
+                        <div className="mb-6 inline-block">
+                            <span className="px-4 py-2 rounded-full glass text-sm font-semibold">
+                                🌟 100% Free & Open Source
+                            </span>
+                        </div>
+
+                        <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
+                            <span className="gradient-text">Islamic Knowledge</span>
+                            <br />
+                            <span className="text-gray-900 dark:text-white">For Everyone</span>
+                        </h1>
+
+                        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-4 max-w-3xl mx-auto leading-relaxed">Access the Quran and Hadith without ads, subscriptions, or paywalls. Join the open-source movement building the future of Islamic apps.
+
+
+                        
+                        </p>
+
+                        <p className="arabic-font text-3xl md:text-4xl text-amber-600 dark:text-amber-400 mb-12">
+                            بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                            <a 
+                                href="./modules.html"
+                                className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-blue-500 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all btn-ripple animate-pulse-glow"
+                            >
+                                <i className="fas fa-rocket mr-2"></i>
+                                Explore Platform
+                            </a>
+                            <a 
+                                href="https://github.com/noorbytes/ilmverseapp"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-8 py-4 glass rounded-xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all"
+                            >
+                                <i className="fab fa-github mr-2"></i>
+                                View on GitHub
+                            </a>
+                        </div>
+
+                        {/* Stats */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                            {[
+                                { icon: 'fa-book-quran', label: 'Complete Quran', value: '114 Surahs' },
+                                { icon: 'fa-book', label: 'Hadith Books', value: '6 Collections' },
+                                { icon: 'fa-language', label: 'Translations', value: 'Multi-Language' },
+                                { icon: 'fa-users', label: 'Community', value: 'Growing' }
+                            ].map((stat, idx) => (
+                                <div key={idx} className="glass rounded-2xl p-6 card-hover stat-item" style={{animationDelay: `${idx * 0.1}s`}}>
+                                    <i className={`fas ${stat.icon} text-3xl gradient-text mb-3`}></i>
+                                    <div className="text-2xl font-bold mb-1">{stat.value}</div>
+                                    <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Features Section
+        const Features = () => {
+            const features = [
+                {
+                    icon: 'fa-quran',
+                    title: 'Complete Quran Hub',
+                    description: 'Full Quran with multiple scripts, translations, verse-by-verse recitation, and comprehensive Tafsir collection.',
+                    status: 'Live',
+                    color: 'from-emerald-500 to-teal-500',
+                    details: ['Uthmani & Indo-Pak scripts', 'Multi-language translations', 'Audio recitations', 'Ibn Kathir Tafsir']
+                },
+                {
+                    icon: 'fa-book-open',
+                    title: 'Authentic Hadith Collection',
+                    description: 'Six authentic books of Hadith with advanced search, proper categorization, and detailed references.',
+                    status: 'Live',
+                    color: 'from-blue-500 to-indigo-500',
+                    details: ['Sahih Bukhari & Muslim', 'Abu Dawud, Ibn Majah', 'Nasai & Tirmidhi', 'Advanced search']
+                },
+                {
+                    icon: 'fa-graduation-cap',
+                    title: 'Islamic Learning Tools',
+                    description: 'Comprehensive learning resources including Tajweed rules, daily Azkar, Duas, and interactive quizzes.',
+                    status: 'Coming Soon',
+                    color: 'from-purple-500 to-pink-500',
+                    details: ['Tajweed guides', 'Daily Azkar & Duas', 'Qibla direction', 'Islamic quizzes']
+                },
+                {
+                    icon: 'fa-calendar-check',
+                    title: 'Muslim Lifestyle Tools',
+                    description: 'Prayer tracker, Ramadan fasting tracker, Zakat calculator, and productivity features for daily Islamic practice.',
+                    status: 'Coming Soon',
+                    color: 'from-orange-500 to-red-500',
+                    details: ['Prayer tracker', 'Fasting tracker', 'Zakat calculator', 'Habit building']
+                }
+            ];
+
+            return (
+                <section id="features" className="py-24 px-6 bg-white dark:bg-slate-800">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl md:text-6xl font-black mb-6">
+                                <span className="gradient-text">Powerful Features</span>
+                            </h2>
+                            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                                Everything you need for your Islamic journey, completely free and open source
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-8">
+                            {features.map((feature, idx) => (
+                                <div key={idx} className="glass rounded-3xl p-8 card-hover relative overflow-hidden group">
+                                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.color}`}></div>
+                                    
+                                    <div className="flex items-start justify-between mb-6">
+                                        <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white text-2xl`}>
+                                            <i className={`fas ${feature.icon}`}></i>
+                                        </div>
+                                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                                            feature.status === 'Live' 
+                                                ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300' 
+                                                : 'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300'
+                                        }`}>
+                                            {feature.status}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                                    <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">{feature.description}</p>
+
+                                    <ul className="space-y-2">
+                                        {feature.details.map((detail, i) => (
+                                            <li key={i} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                                <i className="fas fa-check-circle text-emerald-500"></i>
+                                                {detail}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Why Open Source Section
+        const WhyOpenSource = () => {
+            return (
+                <section className="py-24 px-6 bg-gradient-to-br from-emerald-500 to-blue-500 relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-10">
+                        <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+                        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+                    </div>
+
+                    <div className="max-w-6xl mx-auto relative z-10">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
+                                Why Open Source?
+                            </h2>
+                            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+                                Islamic knowledge should be free, accessible, and community-driven
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {[
+                                {
+                                    icon: 'fa-heart',
+                                    title: 'Free Forever',
+                                    description: 'No subscriptions, no ads, no tracking. Just pure knowledge for the sake of Allah.'
+                                },
+                                {
+                                    icon: 'fa-shield-halved',
+                                    title: 'Privacy First',
+                                    description: 'Your data stays yours. No analytics, no tracking, complete privacy guaranteed.'
+                                },
+                                {
+                                    icon: 'fa-users',
+                                    title: 'Community Driven',
+                                    description: 'Built by Muslims, for Muslims. Everyone can contribute and improve the platform.'
+                                },
+                                {
+                                    icon: 'fa-code',
+                                    title: 'Transparent',
+                                    description: 'Every line of code is open. See exactly how it works and suggest improvements.'
+                                },
+                                {
+                                    icon: 'fa-globe',
+                                    title: 'Accessible',
+                                    description: 'Works everywhere, on any device. Offline support coming soon for remote areas.'
+                                },
+                                {
+                                    icon: 'fa-infinity',
+                                    title: 'Sustainable',
+                                    description: 'Community-funded and maintained. No corporate interests, just pure intentions.'
+                                }
+                            ].map((item, idx) => (
+                                <div key={idx} className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all card-hover">
+                                    <i className={`fas ${item.icon} text-4xl text-white mb-4`}></i>
+                                    <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                                    <p className="text-white/80 leading-relaxed">{item.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Roadmap Section
+        const Roadmap = () => {
+            const roadmapItems = [
+                { phase: 'Phase 1', title: 'Foundation', status: 'Completed', items: ['Complete Quran with translations', 'Six Hadith collections', 'Search functionality', 'Basic UI/UX'] },
+                { phase: 'Phase 2', title: 'Enhancement', status: 'In Progress', items: ['Dark mode', 'Audio recitations', 'Tafsir integration', 'Mobile optimization'] },
+                { phase: 'Phase 3', title: 'Learning Tools', status: 'Planned', items: ['Tajweed guides', 'Daily Azkar & Duas', 'Islamic calendar', 'Prayer times'] },
+                { phase: 'Phase 4', title: 'Lifestyle', status: 'Planned', items: ['Prayer tracker', 'Ramadan tracker', 'Zakat calculator', 'Habit building'] },
+                { phase: 'Phase 5', title: 'Advanced', status: 'Future', items: ['AI chatbot', 'Offline mode', 'Mobile apps', 'Community features'] }
+            ];
+
+            return (
+                <section id="roadmap" className="py-24 px-6 bg-gray-50 dark:bg-slate-900">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl md:text-6xl font-black mb-6">
+                                <span className="gradient-text">Development Roadmap</span>
+                            </h2>
+                            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                                Our journey to build the most comprehensive Islamic knowledge platform
+                            </p>
+                        </div>
+
+                        <div className="relative">
+                            {/* Timeline Line */}
+                            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-500 to-blue-500 transform -translate-x-1/2"></div>
+
+                            <div className="space-y-12">
+                                {roadmapItems.map((item, idx) => (
+                                    <div key={idx} className={`flex items-center gap-8 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                                        <div className="flex-1 glass rounded-2xl p-8 card-hover">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <span className="text-sm font-bold text-emerald-500">{item.phase}</span>
+                                                <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                                                    item.status === 'Completed' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300' :
+                                                    item.status === 'In Progress' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' :
+                                                    'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
+                                                }`}>
+                                                    {item.status}
+                                                </span>
+                                            </div>
+                                            <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                                            <ul className="space-y-2">
+                                                {item.items.map((feature, i) => (
+                                                    <li key={i} className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                                                        <i className="fas fa-check-circle text-emerald-500"></i>
+                                                        {feature}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        <div className="hidden md:flex w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 items-center justify-center text-white font-bold z-10 shadow-lg">
+                                            {idx + 1}
+                                        </div>
+
+                                        <div className="flex-1 hidden md:block"></div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Contribute Section
+        const Contribute = () => {
+            const ways = [
+                {
+                    icon: 'fa-code',
+                    title: 'Code Contributions',
+                    description: 'Help build features, fix bugs, and improve the platform',
+                    action: 'Start Contributing',
+                    link: 'https://github.com/noorbytes/ilmverseapp/compare',
+                    color: 'from-emerald-500 to-teal-500'
+                },
+                {
+                    icon: 'fa-language',
+                    title: 'Translation Help',
+                    description: 'Make Islamic content available in more languages',
+                    action: 'Join Translation Team',
+                    link: 'https://github.com/orgs/noorbytes/discussions',
+                    color: 'from-blue-500 to-indigo-500'
+                },
+                {
+                    icon: 'fa-bug',
+                    title: 'Report Issues',
+                    description: 'Help us improve by reporting bugs and suggesting features',
+                    action: 'Submit Issue',
+                    link: 'https://github.com/noorbytes/ilmverseapp/issues/new',
+                    color: 'from-purple-500 to-pink-500'
+                },
+                {
+                    icon: 'fa-hand-holding-heart',
+                    title: 'Financial Support',
+                    description: 'Help maintain servers and development costs',
+                    action: 'Support Project',
+                    link: 'https://www.paypal.me/ilmverse',
+                    color: 'from-orange-500 to-red-500'
+                }
+            ];
+
+            return (
+                <section id="contribute" className="py-24 px-6 bg-white dark:bg-slate-800">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl md:text-6xl font-black mb-6">
+                                <span className="gradient-text">Join the Movement</span>
+                            </h2>
+                            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+                                Be part of something bigger. Help us build the ultimate Islamic knowledge platform for the Ummah.
+                            </p>
+                            <div className="inline-block glass rounded-2xl p-6">
+                                <p className="arabic-font text-2xl text-amber-600 dark:text-amber-400 mb-2">
+                                    مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ
+                                </p>
+                                <p className="text-sm text-gray-600 dark:text-gray-400 italic">
+                                    "Whoever guides someone to goodness will have a reward like the one who did it"
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-8 mb-16">
+                            {ways.map((way, idx) => (
+                                <div key={idx} className="glass rounded-3xl p-8 card-hover relative overflow-hidden group">
+                                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${way.color}`}></div>
+                                    
+                                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${way.color} flex items-center justify-center text-white text-2xl mb-6`}>
+                                        <i className={`fas ${way.icon}`}></i>
+                                    </div>
+
+                                    <h3 className="text-2xl font-bold mb-3">{way.title}</h3>
+                                    <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">{way.description}</p>
+
+                                    <a 
+                                        href={way.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${way.color} text-white rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all btn-ripple`}
+                                    >
+                                        {way.action}
+                                        <i className="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* GitHub Stats */}
+                        <div className="glass rounded-3xl p-12 text-center">
+                            <h3 className="text-3xl font-bold mb-8">Join Our Growing Community</h3>
+                            <div className="flex flex-wrap justify-center gap-8">
+                                <div className="text-center">
+                                    <div className="text-4xl font-black gradient-text mb-2">Open Source</div>
+                                    <div className="text-gray-600 dark:text-gray-400">100% Transparent</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-4xl font-black gradient-text mb-2">No Ads</div>
+                                    <div className="text-gray-600 dark:text-gray-400">Forever Free</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-4xl font-black gradient-text mb-2">Community</div>
+                                    <div className="text-gray-600 dark:text-gray-400">Built Together</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Testimonials Section
+        const Testimonials = () => {
+            return (
+                <section id="community" className="py-24 px-6 bg-gradient-to-br from-emerald-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl md:text-6xl font-black mb-6">
+                                <span className="gradient-text">Inspired by Faith</span>
+                            </h2>
+                            <p className="text-xl text-gray-600 dark:text-gray-300">
+                                Guided by the words of Allah and His Messenger ﷺ
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-8">
+                            <div className="glass rounded-3xl p-10 card-hover">
+                                <i className="fas fa-quote-right text-4xl text-emerald-500 mb-6"></i>
+                                <p className="arabic-font text-3xl text-gray-900 dark:text-white mb-4 leading-relaxed">
+                                    اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ
+                                </p>
+                                <p className="text-xl text-gray-600 dark:text-gray-300 mb-4 italic">
+                                    "Read in the name of your Lord who created"
+                                </p>
+                                <p className="text-emerald-600 dark:text-emerald-400 font-semibold">
+                                    Surah Al-Alaq [96:1]
+                                </p>
+                            </div>
+
+                            <div className="glass rounded-3xl p-10 card-hover">
+                                <i className="fas fa-quote-right text-4xl text-blue-500 mb-6"></i>
+                                <p className="arabic-font text-3xl text-gray-900 dark:text-white mb-4 leading-relaxed">
+                                    خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
+                                </p>
+                                <p className="text-xl text-gray-600 dark:text-gray-300 mb-4 italic">
+                                    "The best among you are those who learn the Quran and teach it"
+                                </p>
+                                <p className="text-blue-600 dark:text-blue-400 font-semibold">
+                                    Sahih Bukhari
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // CTA Section
+        const CTA = () => {
+            return (
+                <section className="py-24 px-6 bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 relative overflow-hidden gradient-animate">
+                    <div className="absolute inset-0 opacity-20">
+                        <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl animate-float"></div>
+                        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+                    </div>
+
+                    <div className="max-w-4xl mx-auto text-center relative z-10">
+                        <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
+                            Ready to Make a Difference?
+                        </h2>
+                        <p className="text-xl text-white/90 mb-12 leading-relaxed">
+                            Join thousands of Muslims building the future of Islamic knowledge. Every contribution counts, every line of code is sadaqah jariyah.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <a 
+                                href="https://github.com/noorbytes/ilmverseapp"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-10 py-5 bg-white text-gray-900 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all btn-ripple"
+                            >
+                                <i className="fab fa-github mr-2"></i>
+                                Start Contributing Today
+                            </a>
+                            <a 
+                                href="#features"
+                                className="px-10 py-5 bg-white/20 backdrop-blur-lg text-white border-2 border-white rounded-xl font-bold text-lg hover:bg-white/30 hover:scale-105 transition-all"
+                            >
+                                <i className="fas fa-compass mr-2"></i>
+                                Explore Features
+                            </a>
+                        </div>
+
+                        <div className="mt-12 glass rounded-2xl p-8 inline-block">
+                            <p className="text-white/90 text-lg mb-2">
+                                <i className="fas fa-star text-yellow-300 mr-2"></i>
+                                Star us on GitHub to show your support
+                            </p>
+                            <p className="text-white/70 text-sm">
+                                Help us reach more people in the Muslim community
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Footer
+        const Footer = () => {
+            return (
+                <footer className="bg-slate-900 text-white py-16 px-6">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid md:grid-cols-4 gap-12 mb-12">
+                            <div>
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-500 flex items-center justify-center">
+                                        <i className="fas fa-book-quran text-white"></i>
+                                    </div>
+                                    <span className="text-2xl font-bold">IlmVerse</span>
+                                </div>
+                                <p className="text-gray-400 leading-relaxed">
+                                    Open source Islamic knowledge platform for everyone, everywhere.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 className="font-bold mb-4">Platform</h4>
+                                <ul className="space-y-2 text-gray-400">
+                                    <li><a href="#features" className="hover:text-emerald-400 transition-colors">Features</a></li>
+                                    <li><a href="#roadmap" className="hover:text-emerald-400 transition-colors">Roadmap</a></li>
+                                    <li><a href="#contribute" className="hover:text-emerald-400 transition-colors">Contribute</a></li>
+                                    <li><a href="#community" className="hover:text-emerald-400 transition-colors">Community</a></li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 className="font-bold mb-4">Resources</h4>
+                                <ul className="space-y-2 text-gray-400">
+                                    <li><a href="https://github.com/noorbytes/ilmverseapp" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">GitHub</a></li>
+                                    <li><a href="https://github.com/noorbytes/ilmverseapp/issues/new" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">Issues</a></li>
+                                    <li><a href="https://github.com/noorbytes/ilmverseapp/discussions" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">Discussions</a></li>
+                                    <li><a href="https://github.com/noorbytes/ilmverseapp/Readme.md" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">Documentation</a></li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 className="font-bold mb-4">Connect</h4>
+                                <div className="flex gap-4">
+                                    <a href="https://github.com/noorbytes/ilmverseapp" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-emerald-500 transition-all">
+                                        <i className="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-all">
+                                        <i className="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-600 transition-all">
+                                        <i className="fab fa-discord"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="border-t border-white/10 pt-8 text-center text-gray-400">
+                            <p className="mb-2">
+                                Made with <i className="fas fa-heart text-red-500"></i> for the Ummah
+                            </p>
+                            <p className="text-sm">
+                                © 2025 IlmVerse. Open source under MIT License.
+                            </p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            const [darkMode, setDarkMode] = useState(false);
+
+            useEffect(() => {
+                // Check system preference
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setDarkMode(isDark);
+            }, []);
+
+            useEffect(() => {
+                if (darkMode) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }, [darkMode]);
+
+            const toggleDarkMode = () => {
+                setDarkMode(!darkMode);
+            };
+
+            return (
+                <>
+                    <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+                    <Hero />
+                    <Features />
+                    <WhyOpenSource />
+                    <Roadmap />
+                    <Contribute />
+                    <Testimonials />
+                    <CTA />
+                    <Footer />
+                </>
+            );
+        };
+
+        // Render App
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+>>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+</body>
+</html>
