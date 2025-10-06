@@ -161,7 +161,7 @@ window.toggleTafsir = function(verseKey) {
 async function changeTafsir(tafsirName, verseKey) {
 // Make function globally accessible
 window.changeTafsir = async function(tafsirName, verseKey) {
->>>>>>> 7a0c61e (Updated landing page, fixed API bugs, added Hadith keyword search)
+
     if (!TAFSIR_IDS[tafsirName]) {
         showToast('Invalid tafsir selection.', 'error');
         return;
